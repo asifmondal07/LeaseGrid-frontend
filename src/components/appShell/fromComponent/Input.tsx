@@ -7,6 +7,7 @@ interface inputProps{
     error?: string | string[];
     required?: boolean;
     label?: string;
+    disabled?: boolean;
 }
 
 export const Input : React.FC<inputProps> = ({
@@ -17,10 +18,11 @@ export const Input : React.FC<inputProps> = ({
         className,
         error,
         required,
-        label
+        label,
+        disabled,
     }:inputProps) => {
     return (
-        <div>
+        <div className="w-full">
             <label className="text-sm font-semibold text-slate-700">{label}</label>
             <input 
                 type={type} 
@@ -28,9 +30,10 @@ export const Input : React.FC<inputProps> = ({
                 value={value}
                 onChange={onChange}
                 required={required}
+                disabled={disabled}
                 className={`
                         ${className} 
-                        w-full bg-slate-50 border border-slate-200 rounded-xl py-3 px-3 
+                        w-full border rounded-xl py-3 px-3 
                         text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 
                         transition-all placeholder:text-slate-400
                 `}

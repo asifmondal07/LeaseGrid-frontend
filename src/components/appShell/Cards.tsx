@@ -26,6 +26,7 @@ import {
     MessageSquareWarning
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { millify } from "millify";
 
 
 export interface CardProps {
@@ -140,7 +141,7 @@ export const StatusCard: React.FC<{ data: CardProps[] }> = ({ data }) => {
                         </div>
                         <div>
                             <p className="text-sm font-bold text-slate-600 mt-1">{item.title}</p>
-                            <p className="text-3xl font-bold text-slate-800">{item.value}</p>
+                            <p className="text-3xl font-bold text-slate-800">{millify(item.value || 0)}</p>
                             <p className="text-xs text-slate-400 font-sm">{item.subtitle}</p>
                             <p className={`text-xl font-medium ${getDesColor(item.badgeText)}`}>
                                 {item.describstion}

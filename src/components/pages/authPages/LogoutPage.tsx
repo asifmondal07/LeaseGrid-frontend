@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { ThreeDot } from 'react-loading-indicators';
 import { useNavigate } from 'react-router-dom';
 
 function LogoutPage() {
@@ -13,9 +14,8 @@ function LogoutPage() {
     }, [navigate]);
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-slate-50">
-            <h1 className="text-2xl font-bold mb-4 text-slate-800">Logging out...</h1>
-            <p className="text-slate-600">You will be redirected shortly.</p>
+        <div className="flex flex-col items-center justify-center min-h-screen">
+            <ThreeDot variant="brick-stack" color="#32cd32" size="medium" text="" textColor="" />
         </div>
     );
 }

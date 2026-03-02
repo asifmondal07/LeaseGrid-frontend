@@ -52,6 +52,7 @@ function SignupPage() {
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             required
             error={error.name}
+            className="border-slate-200"
           />
           <Input
             placeholder="Email"
@@ -60,6 +61,7 @@ function SignupPage() {
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             required
             error={error.email}
+            className="border-slate-200"
           />
           <Input
             placeholder="Password"
@@ -68,6 +70,7 @@ function SignupPage() {
             onChange={(e) => setFormData({ ...formData, password: e.target.value })}
             required
             error={error.password}
+            className="border-slate-200"
           />
           <Button
             label="Signup"

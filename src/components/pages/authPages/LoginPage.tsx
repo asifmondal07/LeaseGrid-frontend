@@ -7,6 +7,7 @@ import { Button } from '../../appShell/fromComponent/button';
 
 function LoginPage() {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -28,6 +29,7 @@ function LoginPage() {
   },[])
 
   const handleLogin = () => {
+    setLoading(true);
     if(
         formData.email === userObj?.email && 
         formData.password === userObj?.password && 
@@ -65,7 +67,7 @@ function LoginPage() {
             value={formData.email} 
             onChange={(e)=>setFormData({...formData,email:e.target.value})}
             error={[error.email,error.checkemail]}
-            
+            className="border-slate-200"
           />
           <Input 
             placeholder="Password" 
@@ -73,6 +75,7 @@ function LoginPage() {
             value={formData.password} 
             onChange={(e)=>setFormData({...formData,password:e.target.value})}
             error={[error.password,error.checkpassword]}
+            className="border-slate-200"
           />
           <Button label="Login" onClick={handleLogin} />
         </div>

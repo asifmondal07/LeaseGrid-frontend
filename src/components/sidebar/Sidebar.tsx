@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import SidebarItem from "./SidebarItems";
-import { useNavigate } from "react-router-dom";
+
 import { 
   User,
   LayoutDashboard,
@@ -13,13 +13,16 @@ import {
   Settings,
   BriefcaseBusiness,
  } from "lucide-react";
+import Modal from "@mui/material/Modal";
+import LogoutPage from "../pages/authPages/LogoutPage";
+
 
 
 const Sidebar: React.FC = () => {
-  const navigate = useNavigate();
   const [username,setUserName] = useState('');
   const user = localStorage.getItem('user') as string;
   const userObj = JSON.parse(user);
+  const [open, setOpen] = useState(false);
   useEffect(()=>{
     if(user){
       setUserName(userObj.name.toUpperCase());
@@ -68,13 +71,17 @@ const Sidebar: React.FC = () => {
                         </span>
           }
           <button 
-            onClick={()=>navigate('/logout')}
+            onClick={()=>setOpen(true)}
             className="px-4 py-1 rounded-xl font-semibold transition-colors
             bg-red-200 text-red-600 hover:bg-red-600 shadow-sm shadow-red-200  
             cursor-pointer hover:text-white text-sm"
           >
             Logout
           </button>
+
+          <Modal open={open} onClose={() => setOpen(false)}>
+            <LogoutPage />
+          </Modal>
       </div>
     </aside>
   );
