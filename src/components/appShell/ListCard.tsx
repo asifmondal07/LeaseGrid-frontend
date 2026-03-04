@@ -1,8 +1,13 @@
 import Checkbox from "@mui/material/Checkbox";
-import { CalendarDays, Clock, House, Mail, MapPin, Phone, UserIcon, type LucideIcon } from "lucide-react";
+import { CalendarDays, Clock, House, Mail, MapPin, Phone, UserIcon,CircleAlert,X, type LucideIcon } from "lucide-react";
 import { Button } from "./fromComponent/button";
 import { useState } from "react";
-import Modal from "./Modal";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import Box from "@mui/material/Box";
+import Dialog from "@mui/material/Dialog";
+
+
 
 
 
@@ -35,6 +40,9 @@ export const UserListCard: React.FC<ListCardProps> = ({ data }) => {
         setOpen(true);
     };
 
+    const handleCloseViewProfile = () => {
+        setOpen(false);
+    };
     const getBadgeColor = (badgeText: string) => {
         switch (badgeText) {
             case "Urgent":
@@ -54,17 +62,17 @@ export const UserListCard: React.FC<ListCardProps> = ({ data }) => {
     const getButton = (item: UserListCardProps, status: string, Icon: LucideIcon) => {
         switch (status) {
             case "Urgent Priority":
-                return <Button label="Assign Tradie" onClick={() => { handelClick(item, Icon) }} color="primary" className="px-10 py-3 " />;
+                return <Button label="Assign Tradie" onClick={() => { handelClick(item, Icon) }} color="primary" className="px-10 py-3 rounded-xl" />;
             case "in_progress":
-                return <Button variant="outlined" label="View Details" onClick={() => { handelClick(item, Icon) }} className="px-10 py-3 " />;
+                return <Button variant="outlined" label="View Details" onClick={() => { handelClick(item, Icon) }} className="px-10 py-3 rounded-xl" />;
             case "completed":
-                return <Button variant="outlined" label="View Details" onClick={() => { handelClick(item, Icon) }} className="px-10 py-3 " />;
+                return <Button variant="outlined" label="View Details" onClick={() => { handelClick(item, Icon) }} className="px-10 py-3 rounded-xl" />;
             case "Disputed":
-                return <Button color="danger" label="View Details" onClick={() => { handelClick(item, Icon) }} className="px-10 py-3 " />;
+                return <Button color="danger" label="View Details" onClick={() => { handelClick(item, Icon) }} className="px-10 py-3 rounded-xl" />;
             case "Scheduled":
-                return <Button variant="outlined" label="View Details" onClick={() => { handelClick(item, Icon) }} className="px-10 py-3 " />
+                return <Button variant="outlined" label="View Details" onClick={() => { handelClick(item, Icon) }} className="px-10 py-3 rounded-xl" />
             default:
-                return <Button color="secondary" label="View Details" onClick={() => { handelClick(item, Icon) }} className="px-10 py-3 " />;
+                return <Button color="secondary" label="View Details" onClick={() => { handelClick(item, Icon) }} className="px-10 py-3 rounded-xl" />;
         }
     };
 
@@ -206,90 +214,157 @@ export const UserListCard: React.FC<ListCardProps> = ({ data }) => {
             </div>
             {open && selectedItems && (
 
-                <Modal isOpen={open} onClose={() => setOpen(false)} title="Job Details" >
-                    <div className="p-2 flex flex-col overflow-y-auto h-[calc(100vh-110px)] scrollbar-hide">
-                        <div className="flex flex-col gap-5 px-4 mt-5 border-b border-slate-200 pb-5">
-                            <div className="flex flex-row items-center gap-2 ">
-                                <div>
-                                    {Icon && <Icon className={`${getBadgeColor(selectedItems.badgeText)} rounded-2xl p-4 w-full h-full`} />}
+                <Dialog open={open} onClose={() => setOpen(false)}>
+                    <Box 
+                        sx={{
+                            maxWidth: "100%",
+                            maxHeight: "100%",
+                            overflow: "hidden",
+                            borderRadius: "16px",       
+                        }}
+                    >
+                        <div className="bg-white rounded-2xl h-[100vh] ">
+                            <div className="flex items-center justify-between border-b border-slate-200 py-4 pl-5">
+                                <div className=" px-5">
+                                    <h2 className="text-xl font-bold text-slate-700">Job Details</h2>
                                 </div>
-                                <div>
-                                    <p className="text-xl font-semibold">{selectedItems.title}</p>
-                                    <p className="text-sm text-slate-500">Job ID: #JOB-8472</p>
+                                <div className="px-5">
+                                    <Tooltip title="Close">
+                                        <IconButton onClick={handleCloseViewProfile}>
+                                                <X className="text-gray-500 hover:text-gray-700 cursor-pointer w-5 h-5"/>
+                                        </IconButton>
+                                    </Tooltip>
+                                </div> 
+                            </div>
+                            <div className="flex flex-col overflow-y-auto h-[calc(100vh-120px)]  scrollbar-hide">
+                                <div className="flex flex-col gap-5 px-10 mt-5 border-b border-slate-200 pb-5">
+                                    <div className="flex flex-row items-center gap-2 ">
+                                        <div>
+                                            {Icon && <Icon className={`${getBadgeColor(selectedItems.badgeText)} rounded-2xl p-4 w-full h-full`} />}
+                                        </div>
+                                        <div>
+                                            <p className="text-xl font-semibold">{selectedItems.title}</p>
+                                            <p className="text-sm text-slate-500">Job ID: #JOB-8472</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <span className={`${getBadgeColor(selectedItems.badgeText)} px-8 py-2 rounded-full font-medium text-md`}>{selectedItems.status}</span>
+                                    </div>
+                                    <div>
+                                        <h5 className="text-sm font-medium text-slate-600">Description</h5>
+                                        <p className="text-sm text-slate-500">{selectedItems.description}</p>
+                                    </div>
+                                    <div>
+                                        <h5 className="text-sm font-medium text-slate-600">Location</h5>
+                                        <div className="flex flex-row items-center gap-2">
+                                            <MapPin className="w-4 h-4 text-teal-400"/> 
+                                            <p className="text-sm text-slate-500">{selectedItems.location}</p>
+                                        </div>
+                                    
+                                    </div>
+                                    <div className="flex flex-row justify-between w-1/2">
+                                        <div className="flex flex-col">
+                                            <h5 className="text-sm font-medium text-slate-600">Posted</h5>
+                                            <p className="text-sm text-slate-500">{selectedItems.postDate}</p>
+                                        </div>
+                                        <div className="flex flex-col items-center">
+                                            <span className="text-xs text-gray-500">{getText(selectedItems.status)}</span>
+                                            <p className={`text-xl font-medium ${getMoneyColor(selectedItems.status)}`}>${selectedItems.budget}</p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div>
-                                <span className={`${getBadgeColor(selectedItems.badgeText)} px-8 py-2 rounded-full font-medium text-md`}>{selectedItems.status}</span>
-                            </div>
-                            <div>
-                                <h5 className="text-sm font-medium text-slate-600">Description</h5>
-                                <p className="text-sm text-slate-500">{selectedItems.description}</p>
-                            </div>
-                            <div>
-                                <h5 className="text-sm font-medium text-slate-600">Location</h5>
-                                <div className="flex flex-row items-center gap-2">
-                                    <MapPin className="w-4 h-4 text-teal-400"/> 
-                                    <p className="text-sm text-slate-500">{selectedItems.location}</p>
+                                <div className="flex flex-col gap-5 px-10 mt-5 border-b border-slate-200 pb-5">
+                                    <h6 className="text-sm font-semibold text-slate-800">Client Information</h6>
+                                    <div className="flex flex-row items-center gap-2 ">
+                                        <div className={`w-15 h-15 rounded-full  
+                                                        flex items-center justify-center border border-teal-200`}
+                                        >
+                                            {selectedItems.jobRequest.avatar ? <img src={selectedItems.jobRequest.avatar} alt=""
+                                                className="rounded-full w-full 
+                                                    h-full " />
+                                            : <UserIcon
+                                                className="w-full h-full p-2 rounded-full bg-gray-200" />
+                                            }
+                                        </div>
+                                        <div>
+                                            <p className="text-md font-semibold">{selectedItems.jobRequest.name}</p>
+                                            <p className="text-xs text-slate-500">{selectedItems.jobRequest.role}</p>  
+                                        </div>
+                                    </div>
+                                    <div className="flex flex-col gap-2 ">
+                                        <div className="flex flex-row items-center gap-2 ">
+                                            <Mail className="text-teal-300 w-4 h-4"/>
+                                            <p className="text-sm text-slate-500">{selectedItems.jobRequest.email}</p>
+                                        </div>
+                                        <div className="flex flex-row items-center gap-2 ">
+                                            <Phone className="text-teal-300 w-4 h-4"/>
+                                            <p className="text-sm text-slate-500">{selectedItems.jobRequest.phone}</p>
+                                        </div>
+                                        {selectedItems.jobRequest.properties &&
+                                            <div className="flex flex-row items-center gap-2 ">
+                                                <House className="text-teal-300 w-4 h-4"/>    
+                                                <p className="text-sm text-slate-500">{selectedItems.jobRequest.properties} Properties Managed</p>
+                                            </div>
+                                        }
+                                    </div>
                                 </div>
-                               
-                            </div>
-                            <div className="flex flex-row justify-between w-1/2">
-                                <div className="flex flex-col">
-                                    <h5 className="text-sm font-medium text-slate-600">Posted</h5>
-                                    <p className="text-sm text-slate-500">{selectedItems.postDate}</p>
-                                </div>
-                                <div className="flex flex-col items-center">
-                                    <span className="text-xs text-gray-500">{getText(selectedItems.status)}</span>
-                                    <p className={`text-xl font-medium ${getMoneyColor(selectedItems.status)}`}>${selectedItems.budget}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="flex flex-col gap-5 px-4 mt-5 border-b border-slate-200 pb-5">
-                            <h6 className="text-sm font-semibold text-slate-800">Client Information</h6>
-                            <div className="flex flex-row items-center gap-2 ">
-                                <div className={`w-15 h-15 rounded-full  
-                                                flex items-center justify-center border border-teal-200`}
-                                >
-                                    {selectedItems.jobRequest.avatar ? <img src={selectedItems.jobRequest.avatar} alt=""
-                                        className="rounded-full w-full 
-                                             h-full " />
-                                    : <UserIcon
-                                        className="w-full h-full p-2 rounded-full bg-gray-200" />
+                                <div className="flex flex-col gap-2 pt-5 px-10">
+                                    <h6 className="text-sm font-semibold text-slate-800">Assignment Status</h6>
+                                    {!selectedItems.tradie ? 
+                                    <>
+                                        <div className="flex flex-col mb-5 gap-5 border-b border-slate-200 pb-8">
+                                            <div className="flex flex-col border border-yellow-300 bg-yellow-50 rounded-xl p-4">
+                                                <div className="flex flex-row items-center gap-2">
+                                                    <CircleAlert className="text-yellow-600 w-4 h-4"/>
+                                                    <h6 className="text-sm font-semibold text-yellow-600">No Tradie Assigned</h6>
+                                                </div>
+                                                <p className="text-sm text-yellow-600">This job requires immediate assignment to prevent further damage.</p>
+                                            </div>
+                                            <div className="">
+                                                <Button 
+                                                    color="primary"
+                                                    onClick={() => {}}
+                                                    label="Assign Tradie"
+                                                    className="w-full py-4 rounded-full "                                        />
+                                            </div>
+                                        </div> 
+                                        <div>
+                                            <h6 className="text-sm font-semibold text-slate-800 pb-5">Suggested Tradies</h6>
+                                        </div>
+                                    </>
+                                        :
+                                        <div className="flex flex-col mb-5 gap-5">
+                                            <div className="flex flex-col border border-green-300 bg-green-50 rounded-xl p-4">
+                                            <div className="flex flex-row items-center gap-2">
+                                                    <div className={`w-10 h-10 rounded-full  
+                                                        flex items-center justify-center
+                                                        border-2 border-teal-200 `}
+                                                    >
+                                                    {selectedItems.tradie.avatar ? <img src={selectedItems.tradie.avatar} alt=""
+                                                        className="rounded-full w-full 
+                                                    h-full " />
+                                                        : <UserIcon
+                                                            className="w-full h-full p-2 rounded-full bg-gray-200" />
+                                                    }
+                                                </div>
+                                                <div>
+                                                    <p className="text-md font-semibold">{selectedItems.tradie.name}</p>
+                                                    <p className="text-xs text-slate-500 ">{selectedItems.tradie.type}</p>  
+                                                </div>
+                                            </div>
+                                            <div></div>
+                                            </div>
+                                            <div>
+
+                                            </div>
+                                        </div>
                                     }
                                 </div>
-                                <div>
-                                    <p className="text-md font-semibold">{selectedItems.jobRequest.name}</p>
-                                    <p className="text-xs text-slate-500">{selectedItems.jobRequest.role}</p>  
-                                </div>
-                            </div>
-                            <div className="flex flex-col gap-2 ">
-                                <div className="flex flex-row items-center gap-2 ">
-                                    <Mail className="text-teal-300 w-4 h-4"/>
-                                    <p className="text-sm text-slate-500">{selectedItems.jobRequest.email}</p>
-                                </div>
-                                <div className="flex flex-row items-center gap-2 ">
-                                    <Phone className="text-teal-300 w-4 h-4"/>
-                                    <p className="text-sm text-slate-500">{selectedItems.jobRequest.phone}</p>
-                                </div>
-                                {selectedItems.jobRequest.properties &&
-                                    <div className="flex flex-row items-center gap-2 ">
-                                        <House className="text-teal-300 w-4 h-4"/>    
-                                        <p className="text-sm text-slate-500">{selectedItems.jobRequest.properties} Properties Managed</p>
-                                    </div>
-                                }
                             </div>
                         </div>
-                        <div>
-                            <h6 className="text-sm font-semibold text-slate-800">Assignment Status</h6>
-                            <div>
-                                
-                            </div>
-                            <div>
-
-                            </div>
-                        </div>
-                    </div>
-                </Modal>
+                    </Box>
+                    
+                </Dialog>
             )}
         </>
     );

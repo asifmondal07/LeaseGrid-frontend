@@ -1,13 +1,15 @@
 import { UserIcon, CalendarDaysIcon, Clock, HousePlus, Mail, UserRoundX, RefreshCwOff, File, BriefcaseBusiness, CircleCheck, UserX, Save } from "lucide-react";
 import { Search, SlidersHorizontal, ArrowDownWideNarrow, LayoutGrid, Info, X } from "lucide-react";
 import React, { useState } from "react";
-import Modal from "../Modal";
 import { Input } from "../fromComponent/Input";
 import Tooltip from '@mui/material/Tooltip';
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from '@mui/material/FormControlLabel';
 import IconButton from "@mui/material/IconButton";
 import { Button } from "../fromComponent/button";
+import Box from "@mui/material/Box";
+import Dialog from "@mui/material/Dialog";
+
 
 
 
@@ -292,7 +294,7 @@ export const UserTable: React.FC<UserTableProps> = ({
                                                   label="View Profile"
                                                   onClick={() => { }}
                                                   color="primary"
-                                                  className="px-3 py-2"
+                                                  className="px-3 py-2 rounded-xl"
                                              />
                                         </IconButton>
                                    </Tooltip>
@@ -319,190 +321,200 @@ export const UserTable: React.FC<UserTableProps> = ({
 
                {isOpen && selectedUser && (
 
-                    <Modal
-                         isOpen={isOpen}
+                    <Dialog
+                         open={isOpen}
                          onClose={() => setIsOpen(false)}
-                    >
-                         <div className="flex flex-col gap-4 h-full  relative rounded-xl">
-                              <div className="flex flex-row gap-5 items-center p-6">
-                                   <div className={`w-20 h-20 rounded-full  
-                                          flex items-center justify-center
-                                          border-3 ${getProfileBorderColor(selectedUser.status)}`}
-                                   >
-                                        {selectedUser.avatar ? <img src={selectedUser.avatar} alt=""
-                                             className="rounded-full w-full 
-                                             h-full " />
-                                             : <UserIcon
-                                                  className="w-full h-full p-2 rounded-full bg-gray-200" />
-                                        }
-                                   </div>
-                                   <div className="flex flex-col">
-                                        <div>
-                                             <p className="text-2xl font-bold text-black">{selectedUser.name}</p>
+                    >   
+                         <Box 
+                              sx={{
+                                   width: "100%", 
+                                   height: "100%", 
+                                   position: "fixed", 
+                                   top: 0,  
+                                   bottom: 0,
+                                   transform: "translateX(-20%)",
+                                   overflow: "hidden",
+                                   zIndex: 9999,
+                              }}
+                         >
+                              <div className="flex flex-col gap-4 mt-5 h-145 relative overflow-hidden rounded-xl bg-white w-150">
+                                   <div className="flex flex-row gap-5 items-center p-4">
+                                        <div className={`w-20 h-20 rounded-full  
+                                             flex items-center justify-center
+                                             border-3 ${getProfileBorderColor(selectedUser.status)}`}
+                                        >
+                                             {selectedUser.avatar ? <img src={selectedUser.avatar} alt=""
+                                                  className="rounded-full w-full 
+                                                  h-full " />
+                                                  : <UserIcon
+                                                       className="w-full h-full p-2 rounded-full bg-gray-200" />
+                                             }
                                         </div>
-                                        <div>
-                                             <p className="text-sm font-bold text-slate-500">{selectedUser.email}</p>
+                                        <div className="flex flex-col">
+                                             <div>
+                                                  <p className="text-2xl font-bold text-black">{selectedUser.name}</p>
+                                             </div>
+                                             <div>
+                                                  <p className="text-sm font-bold text-slate-500">{selectedUser.email}</p>
+                                             </div>
                                         </div>
                                    </div>
-                              </div>
-                              <div
-                                   className="flex flex-row gap-10 items-center border-t border-b 
-                                        border-slate-200 ">
-                                   {navPage.map((page, index) => {
-                                        return (
-                                             <div key={index} >
-                                                  <button
-                                                       onClick={() => setActivePage(index)}
-                                                       className={`text-sm font-medium text-slate-600 
-                                                       cursor-pointer p-5
-                                                        hover:text-teal-600
-                                                       ${activePage === index ? "text-teal-600 border-b-2 border-teal-600 pb-3" : "pb-3"}
-                                                       `}
-                                                  >
-                                                       {page}
-                                                  </button>
+                                   <div className="flex flex-row gap-10 items-center border-t border-b border-slate-200 ">
+                                        {navPage.map((page, index) => {
+                                             return (
+                                                  <div key={index} >
+                                                       <button
+                                                            onClick={() => setActivePage(index)}
+                                                            className={`text-sm font-medium text-slate-600 
+                                                            cursor-pointer p-5 hover:text-teal-600 
+                                                            ${activePage === index ? "text-teal-600 border-b-2 border-teal-600 pb-3" : "pb-3"}
+                                                            `}
+                                                       >
+                                                            {page}
+                                                       </button>
+                                                  </div>
+                                             )
+                                        })}
+                                   </div>
+                                   {
+                                        activePage == 0 && (
+
+                                             <div className="flex flex-col gap-2 overflow-y-auto px-3 roundered-b-xl scrollbar-hide">
+                                                  <div className="flex flex-row justify-between gap-2 ">
+                                                       <Input
+                                                            label="Role"
+                                                            value={selectedUser.type}
+                                                            disabled
+                                                            className={`font-bold w-full py-5 
+                                                            px-5 ${getTypeColor(selectedUser.type)}`}
+                                                       />
+                                                       <Input
+                                                            label="Verification Status"
+                                                            value={selectedUser.status}
+                                                            disabled
+                                                            className={`font-bold w-full py-5 
+                                                            px-5 ${getStatusColor(selectedUser.status)}`}
+                                                       />
+                                                  </div>
+
+                                                  <Input
+                                                       label="Account Created"
+                                                       value={selectedUser.join}
+                                                       className="border-slate-200"
+                                                       disabled
+                                                  />
+                                                  <Input
+                                                       label="Last Seen"
+                                                       value={selectedUser.lastSeen}
+                                                       className="border-slate-200"
+                                                       disabled
+                                                  />
+                                                  {getRoleBasedInput(selectedUser.type)}
+                                                  <Input
+                                                       label="Total Revenue"
+                                                       value={200000}
+                                                       className="border-slate-200"
+                                                       disabled
+                                                  />
+                                                  <div>
+                                                       <div className="flex flex-row gap-4 items-center">
+                                                            <p>Account Status</p>
+                                                            <span
+                                                                 className={`text-xs font-extrabold px-4 py-1 flex items-center 
+                                                       justify-center rounded-full
+                                                       ${getStatusColor(selectedUser.status)}
+                                                  `}
+                                                            >{selectedUser.status}</span>
+                                                       </div>
+                                                       <div>
+                                                            <FormControlLabel control={<Checkbox defaultChecked />} label="Active" />
+                                                            <FormControlLabel control={<Checkbox />} label="Email Verified" />
+                                                            <FormControlLabel control={<Checkbox />} label="Phone Verified" />
+                                                       </div>
+                                                  </div>
+                                             </div>
+
+
+                                        )
+                                   }
+                                   {
+                                        activePage == 1 && (
+
+                                             <div className="flex flex-col gap-2 overflow-y-auto px-3 scrollbar-hide">
+                                                  <div className="flex justify-center">
+                                                       <h1 className="text-lg font-bold">Waiting For Load Activity</h1>
+                                                  </div>
+     
+                                             </div>
+
+
+                                        )
+                                   }
+                                   {
+                                        activePage == 2 && ( 
+                                             <div className="flex flex-col gap-2 overflow-y-auto px-3 scrollbar-hide">
+                                                  <div className="flex justify-center">
+                                                       <h1 className="text-lg font-bold">Waiting For Load Documents</h1>
+                                                  </div>
                                              </div>
                                         )
-                                   })}
-                              </div>
-                              {
-                                   activePage == 0 && (
-
-                                        <div className="flex flex-col gap-2 overflow-y-auto px-3 roundered-b-xl scrollbar-hide">
-                                             <div className="flex flex-row justify-between gap-2 ">
-                                                  <Input
-                                                       label="Role"
-                                                       value={selectedUser.type}
-                                                       disabled
-                                                       className={`font-bold w-full py-5 
-                                                       px-5 ${getTypeColor(selectedUser.type)}`}
-                                                  />
-                                                  <Input
-                                                       label="Verification Status"
-                                                       value={selectedUser.status}
-                                                       disabled
-                                                       className={`font-bold w-full py-5 
-                                                       px-5 ${getStatusColor(selectedUser.status)}`}
-                                                  />
-                                             </div>
-
-                                             <Input
-                                                  label="Account Created"
-                                                  value={selectedUser.join}
-                                                  className="border-slate-200"
-                                                  disabled
-                                             />
-                                             <Input
-                                                  label="Last Seen"
-                                                  value={selectedUser.lastSeen}
-                                                  className="border-slate-200"
-                                                  disabled
-                                             />
-                                             {getRoleBasedInput(selectedUser.type)}
-                                             <Input
-                                                  label="Total Revenue"
-                                                  value={200000}
-                                                  className="border-slate-200"
-                                                  disabled
-                                             />
-                                             <div>
-                                                  <div className="flex flex-row gap-4 items-center">
-                                                       <p>Account Status</p>
-                                                       <span
-                                                            className={`text-xs font-extrabold px-4 py-1 flex items-center 
-                                                  justify-center rounded-full
-                                                  ${getStatusColor(selectedUser.status)}
-                                             `}
-                                                       >{selectedUser.status}</span>
-                                                  </div>
-                                                  <div>
-                                                       <FormControlLabel control={<Checkbox defaultChecked />} label="Active" />
-                                                       <FormControlLabel control={<Checkbox />} label="Email Verified" />
-                                                       <FormControlLabel control={<Checkbox />} label="Phone Verified" />
+                                   }
+                                   {
+                                        activePage == 3 && ( 
+                                             <div className="flex flex-col gap-2 overflow-y-auto px-3 scrollbar-hide">
+                                                  <div className="flex justify-center">
+                                                       <h1 className="text-lg font-bold">Waiting For Load History</h1>
                                                   </div>
                                              </div>
+                                        )
+                                   }
+                                   {/* Bottom Section */}
+                                   <div 
+                                        className="flex items-center justify-between flex-row gap-5 border-t-slate-200
+                                        border-t w-full absolute bottom-0 bg-slate-50 px-4 rounded-b-xl py-2"
+                                   >
+                                        <div className="flex flex-row-start gap-4">
+                                             <Tooltip title="Suspend" >
+                                                  <IconButton>
+                                                       <UserRoundX
+                                                            className="w-12 h-9 text-red-500 hover:text-white 
+                                                            hover:bg-red-600 transition-colors cursor-pointer 
+                                                            rounded-2xl px-2 py-2 bg-red-200"
+                                                       />
+                                                  </IconButton>
+                                             </Tooltip >
+                                             <Tooltip title="Send Email">
+                                                  <IconButton>
+                                                       <Mail className="w-12 h-9 font-medium text-slate-800  text-xs
+                                                       hover:bg-slate-400 transition-colors cursor-pointer 
+                                                       rounded-2xl px-2 py-2 bg-slate-200" />
+                                                  </IconButton>
+                                             </Tooltip>
                                         </div>
-
-
-                                   )
-                              }
-                              {
-                                   activePage == 1 && (
-
-                                        <div className="flex flex-col gap-2 overflow-y-auto px-3 scrollbar-hide">
-                                             <div className="flex justify-center">
-                                                  <h1 className="text-lg font-bold">Waiting For Load Activity</h1>
-                                             </div>
-   
+                                        <div className="flex flex-row-start gap-4 items-center">
+                                             <Tooltip title="Closed">
+                                                  <IconButton>
+                                                       <X
+                                                            onClick={() => setIsOpen(false)}
+                                                            className="bg-slate-200 w-14 h-9 cursor-pointer px-4 py-2
+                                                       rounded-2xl text-slate-800 hover:bg-slate-400 transition-colors"
+                                                       />
+                                                  </IconButton>
+                                             </Tooltip>
+                                             <Tooltip title="Save Changes">
+                                                  <IconButton>
+                                                       <Save
+                                                            className=" bg-teal-400  w-14 h-9 px-4 py-2
+                                                            hover:bg-teal-600 transition-colors cursor-pointer 
+                                                            rounded-2xl text-white "
+                                                       />
+                                                  </IconButton>
+                                             </Tooltip>
                                         </div>
-
-
-                                   )
-                              }
-                              {
-                                   activePage == 2 && ( 
-                                        <div className="flex flex-col gap-2 overflow-y-auto px-3 scrollbar-hide">
-                                             <div className="flex justify-center">
-                                                  <h1 className="text-lg font-bold">Waiting For Load Documents</h1>
-                                             </div>
-                                        </div>
-                                   )
-                              }
-                              {
-                                   activePage == 3 && ( 
-                                        <div className="flex flex-col gap-2 overflow-y-auto px-3 scrollbar-hide">
-                                             <div className="flex justify-center">
-                                                  <h1 className="text-lg font-bold">Waiting For Load History</h1>
-                                             </div>
-                                        </div>
-                                   )
-                              }
-                              {/* Bottom Section */}
-                              <div 
-                                   className="flex items-center justify-between flex-row gap-5 border-t-slate-200
-                                   border-t w-full absolute bottom-0 bg-slate-50 px-4 rounded-b-xl py-2"
-                              >
-                                   <div className="flex flex-row-start gap-4">
-                                        <Tooltip title="Suspend" >
-                                             <IconButton>
-                                                  <UserRoundX
-                                                       className="w-12 h-9 text-red-500 hover:text-white 
-                                                       hover:bg-red-600 transition-colors cursor-pointer 
-                                                       rounded-2xl px-2 py-2 bg-red-200"
-                                                  />
-                                             </IconButton>
-                                        </Tooltip >
-                                        <Tooltip title="Send Email">
-                                             <IconButton>
-                                                  <Mail className="w-12 h-9 font-medium text-slate-800  text-xs
-                                                  hover:bg-slate-400 transition-colors cursor-pointer 
-                                                  rounded-2xl px-2 py-2 bg-slate-200" />
-                                             </IconButton>
-                                        </Tooltip>
-                                   </div>
-                                   <div className="flex flex-row-start gap-4 items-center">
-                                        <Tooltip title="Closed">
-                                             <IconButton>
-                                                  <X
-                                                       onClick={() => setIsOpen(false)}
-                                                       className="bg-slate-200 w-14 h-9 cursor-pointer px-4 py-2
-                                                  rounded-2xl text-slate-800 hover:bg-slate-400 transition-colors"
-                                                  />
-                                             </IconButton>
-                                        </Tooltip>
-                                        <Tooltip title="Save Changes">
-                                             <IconButton>
-                                                  <Save
-                                                       className=" bg-teal-400  w-14 h-9 px-4 py-2
-                                                       hover:bg-teal-600 transition-colors cursor-pointer 
-                                                       rounded-2xl text-white "
-                                                  />
-                                             </IconButton>
-                                        </Tooltip>
                                    </div>
                               </div>
-                         </div>
-                    </Modal>
+                         </Box>
+                    </Dialog>
                )}
           </>
      );

@@ -1,7 +1,7 @@
 import { UserIcon, EyeIcon, CircleCheck, CircleX } from "lucide-react";
 import { Button } from "../fromComponent/button";
 import { useState } from "react";
-import Modal from "../Modal";
+import Modal from "@mui/material/Modal";
 
 export interface RegistrationList {
      avatar?: string;
@@ -58,7 +58,7 @@ export const RegistrationTable: React.FC<RegistrationListProps> = ({ data }) => 
                          label="View All"
                          onClick={() => { }}
                          color="primary"
-                         className="px-5 py-2"
+                         className="px-5 py-2 rounded-xl"
                     />
                </div>
                {data.map((item, index) => {
@@ -236,10 +236,8 @@ export const VerificationQueueTable: React.FC<VerificationListProps> = ({ data }
           </div>
           {isOpen && selectedUser && (
                <Modal
-                    isOpen={isOpen}
+                    open={isOpen}
                     onClose={() => setIsOpen(false)}
-                    title="Review User"
-                    description="Review user details and documents"
                >
                    <div className="flex flex-col gap-5">
                     <div>

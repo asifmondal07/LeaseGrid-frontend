@@ -76,7 +76,7 @@ function SignupPage() {
             label="Signup"
             onClick={handleSignup}
             color="primary"
-            className="w-full px-3 py-3"
+            className="w-full px-3 py-3 rounded-xl"
           />
         </div>
         <div>

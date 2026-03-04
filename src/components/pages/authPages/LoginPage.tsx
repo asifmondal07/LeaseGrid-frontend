@@ -85,7 +85,7 @@ function LoginPage() {
             label="Login" 
             onClick={handleLogin} 
             color="primary" 
-            className="w-full px-3 py-3"
+            className="w-full px-3 py-3 rounded-xl"
           />
           <Loader open={open} onClose={() => setOpen(false)} />
         </div>

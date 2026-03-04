@@ -151,10 +151,11 @@ export const StatusCard: React.FC<{ data: CardProps[] }> = ({ data }) => {
                         </div>
                         <div>
                             {item.buttonText && 
-                                <Button className={`w-full py-2`}
+                                <Button className={`w-full py-2 rounded-xl`}
                                     onClick={()=>item.path && navigate(item.path)}
                                     label={item.buttonText}
                                     color="primary"
+                                    
                                 />
                             }
                         </div>

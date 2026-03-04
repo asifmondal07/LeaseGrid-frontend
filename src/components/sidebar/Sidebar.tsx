@@ -86,7 +86,7 @@ const Sidebar: React.FC = () => {
           label="Logout"
           onClick={handleLogout}
           color="danger"
-          className="px-3 py-1"
+          className="px-3 py-1 rounded-xl"
         />
 
         <Loader open={open} onClose={() => setOpen(false)} />

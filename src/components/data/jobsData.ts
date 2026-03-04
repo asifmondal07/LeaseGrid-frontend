@@ -7,7 +7,7 @@ import {
     FolderOpen,
     MessageSquareWarning,
     TriangleAlert,
-    ClockCheck
+    ClockAlert,
 } from "lucide-react";
 import type { UserListCardProps } from "../appShell/ListCard";
 
@@ -148,13 +148,13 @@ export const listCardData:UserListCardProps[] = [
         location: "123 Main St, Anytown, USA",
         postDate: "2022-01-01",
         time: "2 hours ago",
-        icon: ClockCheck,
+        icon: ClockAlert,
         badgeText: "Scheduled",
         status: "Scheduled",
         tradie: {
             name: "Michel Anderson",
             avatar: "https://i.pravatar.cc/40",
-            type: "Electrician",
+            type: "Cleaner",
             jobsCompleted: 200,
             status: "Tradie Status",
             distance: 20,

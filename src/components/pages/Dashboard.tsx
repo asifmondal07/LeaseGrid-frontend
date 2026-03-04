@@ -187,7 +187,7 @@ const Dashboard: React.FC = () => {
               </div>
               <div className="px-6">
                 <Button
-                  className="w-full px-6 py-2"
+                  className="w-full px-6 py-2 rounded-xl"
                   onClick={() => navigate('/compliance')}
                   label="Review All"
                   color="primary"
