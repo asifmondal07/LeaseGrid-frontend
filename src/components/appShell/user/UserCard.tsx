@@ -209,7 +209,7 @@ export const UserTable: React.FC<UserTableProps> = ({
                               label="Total Properties"
                               value={selectedUser?.TotalProperties || ""}
                               className="border-slate-200"
-                              onChange={(e: React.ChangeEvent<HTMLInputElement>) => { }}
+                              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {e.target.value }}
                          />
                     );
 
@@ -218,14 +218,14 @@ export const UserTable: React.FC<UserTableProps> = ({
                          label="Documents Status"
                          value={selectedUser?.documentsStatus || ""}
                          className="border-slate-200"
-                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => { }}
+                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => { e.target.value }}
                     />;
                case "Tradie":
                     return <Input
                          label="Total Jobs Completed"
                          value={selectedUser?.totalJobsCompleted || ""}
                          className="border-slate-200"
-                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => { }}
+                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => { e.target.value }}
                     />;
           }
      };
