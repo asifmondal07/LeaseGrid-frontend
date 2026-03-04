@@ -148,7 +148,7 @@ export const listCardData:UserListCardProps[] = [
         description: "Annual HVAC system inspection and maintenance for commercial property.",
         location: "123 Main St, Anytown, USA",
         postDate: "2022-01-01",
-        time: "2 hours ago",
+        time: "2 days ahead",
         icon: ClockAlert,
         badgeText: "Scheduled",
         status: "Scheduled",

@@ -1,15 +1,57 @@
+import Popover from "@mui/material/Popover";
 import { Bell } from "lucide-react";
 import { useEffect, useState } from "react";
+import { notificationData, type Notification } from "../../data/notifiacation";
+import { useAuthStore } from "../../store/useAuthStore";
+import { useNavigate } from "react-router-dom";
 
-export default function HeaderNavigation({ title ,subtitle }: { title: string ,subtitle?: string }) {
-     const [username,setUserName] = useState('');
+export default function HeaderNavigation({ title, subtitle }: { title: string, subtitle?: string }) {
+     const [username, setUserName] = useState('');
+     const [open, setOpen] = useState(false);
+     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+     const [notificationCount, setNotificationCount] = useState<number>(0);
+     const [notifiacation, setNotifiacation] = useState<Notification[]>();
      const user = localStorage.getItem('user') as string;
      const userObj = JSON.parse(user);
-     useEffect(()=>{
-       if(user){
-         setUserName(userObj.name.toUpperCase());
-       }
-     },[])
+     const { setNotification } = useAuthStore();
+     const navigate = useNavigate();
+
+     useEffect(() => {
+          if (user) {
+               setUserName(userObj.name.toUpperCase());
+          }
+          if (notificationData) {
+               setNotifiacation(notificationData);
+               setNotificationCount(notificationData.filter((notification) => !notification.read).length);
+               setNotification(notificationData);
+          }
+          console.log("notifiacation", notifiacation);
+     }, [notificationData])
+
+     const handleNotificationClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+          setOpen(true);
+          setAnchorEl(event.currentTarget);
+     }
+
+     const handleClose = () => {
+          setOpen(false);
+          setAnchorEl(null);
+     }
+
+     const handelClickNotification =()=>{
+          setOpen(false);
+          setAnchorEl(null);
+          navigate("/jobs");
+     }
+
+     const getNotificationColor = (notification: Notification) => {
+          if (notification.read === false) {
+               return "bg-teal-50 border border-teal-300 hover:bg-teal-100 hover:shadow-lg";
+          }
+          return "bg-slate-50 border border-slate-300 hover:bg-slate-100 hover:shadow-lg";
+     }
+
+
      return (
           <div className="h-17 sticky top-0 z-10 w-full
                     border-b border-slate-100 
@@ -59,11 +101,78 @@ export default function HeaderNavigation({ title ,subtitle }: { title: string ,s
 
 
                     {/* Notification */}
-                    <button className="relative text-slate-600 hover:text-slate-900 cursor-pointer" >
-                         <Bell className="w-6 h-6 " />
+                    <button className="relative text-slate-600 hover:text-slate-900 cursor-pointer"
+                         onClick={handleNotificationClick}
+                    >
+                         <Bell className="w-6 h-6" />
                          {/* Notification dot */}
-                         <span className="absolute -top-1 -right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                         {notificationCount > 0 ? (
+                              <span
+                                   className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 
+                                   rounded-full text-white text-xs flex items-center justify-center"
+                              >
+                                   {notificationCount}
+                              </span>
+                         ) : (
+                              null
+                         )}
                     </button>
+
+                    {open && (
+                         <Popover
+                              open={open}
+                              anchorEl={anchorEl}
+                              onClose={handleClose}
+                              anchorOrigin={{
+                                   vertical: "bottom",
+                                   horizontal: "right",
+                              }}
+                              transformOrigin={{
+                                   vertical: "top",
+                                   horizontal: "right",
+                              }}
+                              PaperProps={{
+                                 sx:{
+                                   borderRadius:2,
+                                   maxHeight:"150",
+                                   overflowY:"auto",
+                                   scrollbarWidth:"none",
+                                   "&::-webkit-scrollbar": {
+                                     display: "none",
+                                   },
+                                 }
+                              }}
+                         >
+                              <div className="p-4 w-80 max-h-150 overflow-y-auto scrollbar-hide ">
+                                   <h2 className="text-lg font-semibold mb-3">Notifications</h2>
+
+                                   {notifiacation && notifiacation.length > 0 ? (
+                                        notifiacation.map((notification,key) => (
+                                             <div
+                                                  onClick={()=>handelClickNotification()}
+                                                  key={key}
+                                                  className={`${getNotificationColor(notification)} flex 
+                                                   flex-col rounded-2xl p-3 mb-2 cursor-pointer `}
+                                             >
+                                                  <p className="text-xs font-semibold text-slate-700">
+                                                       {notification.title}
+                                                  </p>
+                                                  <p className="text-xs text-slate-500">
+                                                       {notification.description}
+                                                  </p>
+                                                  <p className="text-xs text-slate-400 ml-auto mt-2">
+                                                       {notification.time}
+                                                  </p>
+                                             </div>
+                                        ))
+                                   ) : (
+                                        <p className="text-sm text-slate-500">No new notifications</p>
+                                   )}
+                              </div>
+                         </Popover>
+                    )}
+
+
                     <div className="text-5xl font-light text-slate-100 flex  iteams-center pb-3">|</div>
                     {/* Profile */}
                     <div className="flex items-center gap-3 mr-5 cursor-pointer">

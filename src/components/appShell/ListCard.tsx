@@ -360,6 +360,17 @@ export const UserListCard: React.FC<ListCardProps> = ({ data }) => {
                                                     <p className="text-md font-semibold">{selectedItems.tradie.name}</p>
                                                     <p className="text-xs text-slate-500 ">{selectedItems.tradie.type}</p>  
                                                 </div>
+                                                <div className="flex items-center ml-auto">
+                                                    {selectedItems.status === "Scheduled" &&
+                                                    <Button 
+                                                        label="Cancel" 
+                                                        onClick={() => { }}
+                                                        color="danger"
+                                                        className="px-4
+                                                         py-2 rounded-full" 
+                                                    />
+                                                    }
+                                                </div>
                                             </div>
                                             <div></div>
                                             </div>
