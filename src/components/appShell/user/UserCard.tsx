@@ -1,5 +1,5 @@
 import { UserIcon, CalendarDaysIcon, Clock, HousePlus, Mail, UserRoundX, RefreshCwOff, File, BriefcaseBusiness, CircleCheck, UserX, Save } from "lucide-react";
-import { Search, SlidersHorizontal, ArrowDownWideNarrow, LayoutGrid, Info, X } from "lucide-react";
+import { Search, SlidersHorizontal, ArrowDownWideNarrow, LayoutGrid, X } from "lucide-react";
 import React, { useState } from "react";
 import { Input } from "../fromComponent/Input";
 import Tooltip from '@mui/material/Tooltip';
@@ -116,13 +116,11 @@ export const UserTable: React.FC<UserTableProps> = ({
      data,
 }) => {
      const [isOpen, setIsOpen] = useState(false);
-     const [name, setName] = useState("");
      const [selectedUser, setSelectedUser] = useState<UserTableList | null>(null);
      const [activePage, setActivePage] = useState(0);
 
      const handleViewProfile = (data: UserTableList) => {
           setSelectedUser(data);
-          setName(data.name);
           setIsOpen(true);
      };
      const getStatusColor = (status: string) => {
