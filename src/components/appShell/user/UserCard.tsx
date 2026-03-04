@@ -330,18 +330,14 @@ export const UserTable: React.FC<UserTableProps> = ({
                     >   
                          <Box 
                               sx={{
-                                   width: "100%", 
-                                   height: "100%", 
-                                   position: "fixed", 
-                                   top: 0,  
-                                   bottom: 0,
-                                   transform: "translateX(-20%)",
+                                   maxWidth: "100%",
+                                   maxHeight: "100%",
                                    overflow: "hidden",
-                                   zIndex: 9999,
-                              }}
+                                   borderRadius: "16px",       
+                              }}    
                          >
-                              <div className="flex flex-col gap-4 mt-5 h-145 relative overflow-hidden rounded-xl bg-white w-150">
-                                   <div className="flex flex-row gap-5 items-center p-4">
+                              <div className="flex flex-col gap-4 mt-5 h-135 relative  bg-white w-150">
+                                   <div className="flex flex-row gap-5 items-center px-4">
                                         <div className={`w-20 h-20 rounded-full  
                                              flex items-center justify-center
                                              border-3 ${getProfileBorderColor(selectedUser.status)}`}
@@ -362,7 +358,7 @@ export const UserTable: React.FC<UserTableProps> = ({
                                              </div>
                                         </div>
                                    </div>
-                                   <div className="flex flex-row gap-10 items-center border-t border-b border-slate-200 ">
+                                   <div className="flex flex-row gap-10 items-center border-t border-b border-slate-200 px-4">
                                         {navPage.map((page, index) => {
                                              return (
                                                   <div key={index} >
@@ -382,7 +378,7 @@ export const UserTable: React.FC<UserTableProps> = ({
                                    {
                                         activePage == 0 && (
 
-                                             <div className="flex flex-col gap-2 overflow-y-auto px-3 roundered-b-xl scrollbar-hide">
+                                             <div className="flex flex-col gap-2 overflow-y-auto px-3 roundered-b-xl scrollbar-hide px-4">
                                                   <div className="flex flex-row justify-between gap-2 ">
                                                        <Input
                                                             label="Role"
@@ -443,7 +439,7 @@ export const UserTable: React.FC<UserTableProps> = ({
                                    {
                                         activePage == 1 && (
 
-                                             <div className="flex flex-col gap-2 overflow-y-auto px-3 scrollbar-hide">
+                                             <div className="flex flex-col gap-2 overflow-y-auto px-3 scrollbar-hide px-4">
                                                   <div className="flex justify-center">
                                                        <h1 className="text-lg font-bold">Waiting For Load Activity</h1>
                                                   </div>
@@ -455,7 +451,7 @@ export const UserTable: React.FC<UserTableProps> = ({
                                    }
                                    {
                                         activePage == 2 && ( 
-                                             <div className="flex flex-col gap-2 overflow-y-auto px-3 scrollbar-hide">
+                                             <div className="flex flex-col gap-2 overflow-y-auto px-3 scrollbar-hide px-4">
                                                   <div className="flex justify-center">
                                                        <h1 className="text-lg font-bold">Waiting For Load Documents</h1>
                                                   </div>
@@ -464,7 +460,7 @@ export const UserTable: React.FC<UserTableProps> = ({
                                    }
                                    {
                                         activePage == 3 && ( 
-                                             <div className="flex flex-col gap-2 overflow-y-auto px-3 scrollbar-hide">
+                                             <div className="flex flex-col gap-2 overflow-y-auto px-3 scrollbar-hide px-4">
                                                   <div className="flex justify-center">
                                                        <h1 className="text-lg font-bold">Waiting For Load History</h1>
                                                   </div>
@@ -474,7 +470,7 @@ export const UserTable: React.FC<UserTableProps> = ({
                                    {/* Bottom Section */}
                                    <div 
                                         className="flex items-center justify-between flex-row gap-5 border-t-slate-200
-                                        border-t w-full absolute bottom-0 bg-slate-50 px-4 rounded-b-xl py-2"
+                                        border-t w-full absolute bottom-0 bg-slate-50 px-2 rounded-b-xl py-2"
                                    >
                                         <div className="flex flex-row-start gap-4">
                                              <Tooltip title="Suspend" >

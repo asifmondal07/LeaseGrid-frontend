@@ -104,6 +104,7 @@ export const listCardData:UserListCardProps[] = [
             jobsCompleted: 200,
             status: "Tradie Status",
             distance: 20,
+            progress: 70,
         },
         budget: 2000,
         jobRequest: {

@@ -6,6 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
 import Box from "@mui/material/Box";
 import Dialog from "@mui/material/Dialog";
+import LinearWithValueLabel from "../common/ProgressBar";
 
 
 
@@ -20,7 +21,7 @@ export interface UserListCardProps {
     time: string;
     badgeText: string;
     status: string;
-    tradie?: { name: string, avatar: string, type: string, jobsCompleted: number, status: string, distance: number }
+    tradie?: { name: string, avatar: string, type: string, jobsCompleted: number, status: string, distance: number,progress?: number }
     budget: number;
     jobRequest: { name: string, avatar: string, email: string, phone: string, role: string, properties?: number }
 }
@@ -139,7 +140,9 @@ export const UserListCard: React.FC<ListCardProps> = ({ data }) => {
                                     <p className="text-sm text-slate-500">{item.time}</p>
                                 </div>
                             </div>
-
+                            {item.tradie?.progress && <div className="px-13 py-2">
+                                <LinearWithValueLabel value={item.tradie?.progress} />
+                            </div>}
                             <div
                                 className=" flex flex-row justify-between items-center gap-6
                                  w-full px-8 border-slate-200 border-t pt-2 absolute bottom-5 "
@@ -229,7 +232,7 @@ export const UserListCard: React.FC<ListCardProps> = ({ data }) => {
                             borderRadius: "16px",       
                         }}
                     >
-                        <div className="bg-white rounded-2xl h-[100vh] ">
+                        <div className="bg-white h-[100vh] ">
                             <div className="flex items-center justify-between border-b border-slate-200 py-4 pl-5">
                                 <div className=" px-5">
                                     <h2 className="text-xl font-bold text-slate-700">Job Details</h2>
