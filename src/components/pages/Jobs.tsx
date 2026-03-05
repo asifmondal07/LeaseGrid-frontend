@@ -5,7 +5,8 @@ import { UserListCard } from "../appShell/ListCard";
 import { listCardData } from "../data/jobsData";
 import ProgressBar from "../common/ProgressBar";
 import { WidgetsCard } from "../appShell/WidgetsCard";
-import { JobData } from "../data/Job";
+import { JobData, JobTableData } from "../data/Job";
+import { JobTable } from "../appShell/job/JobTable";
 
 const Jobs: React.FC = () => {
      return (
@@ -19,8 +20,9 @@ const Jobs: React.FC = () => {
                     <div className="">
                          <UserListCard data={listCardData} />
                     </div>
+               <div className="grid grid-cols-1 lg:grid-cols-2 gap-4  lg:min-h-[420px] ">
                     {/* Third Div Row Components Job Type Distribution */}
-                    <div className="flex flex-col bg-white rounded-2xl h-full shadow-sm shadow-gray-300">
+                    <div className="flex flex-col bg-white rounded-2xl h-[90vh] shadow-sm shadow-gray-300">
                          <div className="flex flex-col px-6 py-8">
                               <h1 className="text-lg font-semibold">Job Type Distribution</h1>
                               <h4 className="text-sm text-gray-500">Most requested services</h4>
@@ -54,14 +56,26 @@ const Jobs: React.FC = () => {
                          
                     </div>
 
+                    
                     {/* Average Response Time */}
-                    <div className="flex flex-col rounded-2xl h-full shadow-sm shadow-gray-300 bg-white">
+                    <div className="flex flex-col rounded-2xl h-[90vh] shadow-sm shadow-gray-300 bg-white">
                          <div className="flex flex-col px-6 py-8">
                               <h1 className="text-lg font-semibold">Average Response Time</h1>
                               <h4 className="text-sm text-gray-500">Average response time by job type</h4>
                          </div>
                          <div className="flex flex-col px-6 py-8 gap-4">
                               <WidgetsCard data={JobData} />
+                         </div>
+                    </div>
+               </div>
+                    {/* Tradie Table */}
+                    <div className="flex flex-col rounded-2xl h-full shadow-sm shadow-gray-300 bg-white">
+                         <div className="flex flex-col px-6 py-8">
+                              <h1 className="text-lg font-semibold">Tradie Performance</h1>
+                              <h4 className="text-sm text-gray-500">Tradie performance by job type</h4>
+                         </div>
+                         <div className="flex flex-col px-6 py-8 gap-4">
+                              <JobTable data={JobTableData} />
                          </div>
                     </div>
               </div>

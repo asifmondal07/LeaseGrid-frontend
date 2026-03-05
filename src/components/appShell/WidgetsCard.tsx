@@ -42,14 +42,14 @@ export const WidgetsCard:React.FC<{data:WidgetsCardProps[]}>=({data})=>{
                 return(
                     <div 
                     key={key}
-                    className={`flex flex-col gap-2 rounded-2xl h-40 
+                    className={`flex flex-col gap-2 rounded-2xl 
                         transition-shadow duration-300 shadow-sm shadow-gray-300 border 
                         ${getDivColor(item.title)} `}
                     >
-                        <div className="flex flex-col gap-2 px-6 py-8">
+                        <div className="flex flex-col gap-2 px-6 py-3 ">
                                 <div className="flex flex-row justify-between">
                                     <p className="text-md font-medium">{item.title}</p>
-                                    <div className="px-5"><Icon className={getTextColor(item.title)} /></div>
+                                    <div className="pt-2 px-2"><Icon className={getTextColor(item.title)} /></div>
                                 </div>
                                 <div>
                                     <p className={`${getTextColor(item.title)} text-3xl font-semibold`}>{item.value} <span className="text-md font-semibold">hrs</span></p>

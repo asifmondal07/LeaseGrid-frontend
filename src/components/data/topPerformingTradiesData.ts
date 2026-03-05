@@ -36,7 +36,7 @@ export const topPerformingTradiesData: TopPerformingTradiesItem[] = [
     rating: 4.3,
     jobsCompleted: 130,
     totalEarnings: 15500,
-    type: "HVAC Specialist ",
+    type: "HVAC ",
     status: "Unavailable",
   },
   {

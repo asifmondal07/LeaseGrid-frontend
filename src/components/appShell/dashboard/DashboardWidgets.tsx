@@ -1,4 +1,4 @@
-import React, { useEffect,useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
      User,
      FileText,
@@ -12,6 +12,7 @@ import {
      UserIcon,
      Angry
 } from 'lucide-react';
+import Rating from '@mui/material/Rating';
 
 // Types for Recent Activity
 export interface ActivityItem {
@@ -161,7 +162,7 @@ export const RecentActivity: React.FC<RecentActivityProps> = ({ data, onViewAll 
 };
 
 // System Alerts
-export const SystemAlerts: React.FC<SystemAlertsProps> = ({ data}) => {
+export const SystemAlerts: React.FC<SystemAlertsProps> = ({ data }) => {
      return (
           <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm h-full flex flex-col">
                <div className="flex justify-between items-center mb-6">
@@ -228,16 +229,16 @@ interface TopPerformingTradiesProps {
 }
 
 export const TopPerformingTradies: React.FC<TopPerformingTradiesProps> = ({ data }) => {
-     const [topTradies,setTopTradies]=useState<TopPerformingTradiesItem[]>([])
-     const getTopTradies=(data:TopPerformingTradiesItem[])=>{
-          const topTradies=data.sort((a,b)=>b.totalEarnings-a.totalEarnings)
+     const [topTradies, setTopTradies] = useState<TopPerformingTradiesItem[]>([])
+     const getTopTradies = (data: TopPerformingTradiesItem[]) => {
+          const topTradies = data.sort((a, b) => b.totalEarnings - a.totalEarnings)
           setTopTradies(topTradies);
      }
      useEffect(() => {
           getTopTradies(data);
 
      }, [data]);
-     const getTopTradiesColor=(index:number)=>{
+     const getTopTradiesColor = (index: number) => {
           switch (index) {
                case 0:
                     return 'bg-teal-50 border-teal-500';
@@ -250,7 +251,7 @@ export const TopPerformingTradies: React.FC<TopPerformingTradiesProps> = ({ data
           }
      }
 
-     const getIdBgColor=(index:number)=>{
+     const getIdBgColor = (index: number) => {
           switch (index) {
                case 0:
                     return 'bg-teal-400';
@@ -267,32 +268,38 @@ export const TopPerformingTradies: React.FC<TopPerformingTradiesProps> = ({ data
           <div className="bg-white p-6 rounded-2xl h-full flex flex-col">
 
                <div className="flex-1 overflow-y-auto pr-2 space-y-3">
-                    {topTradies.map((trades,index) => (
+                    {topTradies.map((trades, index) => (
                          <div key={index} className={`p-4 rounded-xl border 
                               shadow-sm ${getTopTradiesColor(index)}`}
                          >
                               <div className="flex justify-between">
-                                   <div className="flex items-center gap-2">
+                                   <div className="flex items-center gap-2  w-70 ">
                                         <p className={`text-sm font-medium text-slate-800 px-4 py-2 
                                              rounded-full ${getIdBgColor(index)}`}>
-                                             {index+1}
+                                             {index + 1}
                                         </p>
                                         {trades.avatar ? <img src={trades.avatar} alt=""
                                              className="border-1 border-rose-400 w-10 h-10 rounded-full" />
                                              : <UserIcon
                                                   className="p-2 w-10 h-10 rounded-full bg-gray-200" />
                                         }
-                                        <p className="text-lg font-bold text-slate-800">{trades.name}</p>
                                    </div>
-                                   <div className="flex flex-col">
-
-                                        <p className='text-lg font-bold'>${trades.totalEarnings}</p>
-                                        <p className="text-sm text-slate-500">{trades.jobsCompleted} Jobs Completed</p>
+                                   <div className="flex flex-col flex w-full ">
+                                        <p className="text-md font-semibold text-slate-800">{trades.name}</p>
+                                        <p className="text-xs font-semibold text-slate-500 w-full">{trades.type}</p>
+                                   </div>
+                                   <div className="flex justify-end w-full pr-4 ">
+                                        <p className='text-lg font-semibold'>${trades.totalEarnings}</p>
                                    </div>
                               </div>
-                              <div className="flex flex-col ml-24">
-                                   <p className="text-sm font-medium text-slate-800">{trades.type}</p>
-                                   <p className="text-sm text-slate-500">Rating: {trades.rating}</p>
+                              <div className="flex flex-row justify-between items-center pt-6">
+                                   <div className="flex items-center w-full ">
+                                        <p className="text-sm text-slate-800">{trades.jobsCompleted} Jobs Completed</p>
+                                   </div>
+                                   <div className="flex items-center gap-2 w-full justify-end pr-4">
+                                        <Rating value={trades.rating} readOnly size="small" precision={0.5} />
+                                        <p className="text-xs text-slate-500">{trades.rating}</p>
+                                   </div>
                               </div>
                          </div>
                     ))}
@@ -307,7 +314,7 @@ export const TopPerformingTradies: React.FC<TopPerformingTradiesProps> = ({ data
 // Top Landlords by Revenue
 
 export interface TopLandlordsItem {
-     id?:number;
+     id?: number;
      name: string;
      rating: number;
      properties: number;
@@ -324,10 +331,10 @@ interface TopLandlordsProps {
 
 export const TopLandlords: React.FC<TopLandlordsProps> = ({ data, }) => {
 
-     const [topLandlords,setTopLandlords]=useState<TopLandlordsItem[]>([]);
+     const [topLandlords, setTopLandlords] = useState<TopLandlordsItem[]>([]);
 
-     const getTopLandlords=(data:TopLandlordsItem[])=>{
-          const topLandlords=data.sort((a,b)=>b.totalEarnings-a.totalEarnings)
+     const getTopLandlords = (data: TopLandlordsItem[]) => {
+          const topLandlords = data.sort((a, b) => b.totalEarnings - a.totalEarnings)
           setTopLandlords(topLandlords);
      }
 
@@ -336,7 +343,7 @@ export const TopLandlords: React.FC<TopLandlordsProps> = ({ data, }) => {
 
      }, [data]);
 
-     const getTopLandlordsColor=(index:number)=>{
+     const getTopLandlordsColor = (index: number) => {
           switch (index) {
                case 0:
                     return 'bg-teal-50 border-teal-500';
@@ -358,8 +365,8 @@ export const TopLandlords: React.FC<TopLandlordsProps> = ({ data, }) => {
 
      return (
           <div className="bg-white p-6 rounded-2xl h-full flex flex-col">
-               <div className="flex-1 overflow-y-auto pr-2 space-y-3">
-                    {topLandlords.map((landlord,index) => (
+               <div className="flex-1 overflow-y-auto pr-2 space-y-3 scrollbar-hide">
+                    {topLandlords.map((landlord, index) => (
                          <div className={`p-4 rounded-xl border
                               shadow-sm ${getTopLandlordsColor(index)}`}
                          >
@@ -371,15 +378,18 @@ export const TopLandlords: React.FC<TopLandlordsProps> = ({ data, }) => {
                                                   className="p-2 w-10 h-10 rounded-full bg-gray-200" />
                                         }
                                         <div className="flex flex-col">
-                                             <p className="text-lg font-bold text-slate-800">{landlord.name}</p>
-                                             <div className="flex items-center gap-2">
+                                             <p className="text-md font-semibold text-slate-800">{landlord.name}</p>
+                                             <div className="flex items-center gap-2 justify-center">
                                                   <p className="text-sm text-slate-500">{landlord.properties} Properties</p>
-                                                  <p className="text-sm text-slate-500">Rating: {landlord.rating}</p>
+                                                  <div className="flex items-center gap-2">
+                                                       <Rating value={landlord.rating} readOnly size="small" precision={0.5} />
+                                                       <p className="text-sm text-slate-500">{landlord.rating}</p>
+                                                  </div>
                                              </div>
                                         </div>
                                    </div>
                                    <div className="flex flex-col">
-                                        <p className='text-lg font-bold'>${landlord.totalEarnings}</p>
+                                        <p className='text-md font-semibold'>${landlord.totalEarnings}</p>
                                         <p className="text-sm font-medium text-slate-500">{landlord.month}</p>
                                    </div>
                               </div>

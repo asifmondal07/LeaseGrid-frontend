@@ -23,7 +23,9 @@ import {
     CircleDollarSign,
     Receipt,
     FolderOpen,
-    MessageSquareWarning
+    MessageSquareWarning,
+    Tickets,
+    TicketPlus
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { millify } from "millify";
@@ -47,11 +49,13 @@ export const StatusCard: React.FC<{ data: CardProps[] }> = ({ data }) => {
     const getDivColor = (icon: LucideIcon) => {
         switch (icon) {
             case User:
+            case Tickets:
                 return "bg-sky-50";
             case UserPlus:
             case NotebookPen:
                 return "bg-green-50";
             case CirclePlus:
+            case TicketPlus:
                 return "bg-orange-50";
             case OctagonAlert:
                 return "bg-amber-50";
@@ -70,6 +74,7 @@ export const StatusCard: React.FC<{ data: CardProps[] }> = ({ data }) => {
             case Users:
             case Home:
             case FolderOpen:
+            case Tickets:
                 return "text-sky-600 bg-sky-100";
             case Clock:
             case Clock8:
@@ -87,6 +92,7 @@ export const StatusCard: React.FC<{ data: CardProps[] }> = ({ data }) => {
             case Hammer:
             case CirclePlus:
             case MessageSquareWarning:
+            case TicketPlus:
                 return "text-orange-600 bg-orange-100";
             case UserPlus:
             case HousePlus:
@@ -99,6 +105,7 @@ export const StatusCard: React.FC<{ data: CardProps[] }> = ({ data }) => {
             case CircleDollarSign:
                 return "text-violet-600 bg-violet-100";
             case OctagonAlert:
+            
                 return "text-amber-600 bg-amber-100";
             default:
                 return "text-black bg-white";

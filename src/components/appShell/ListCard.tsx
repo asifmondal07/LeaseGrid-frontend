@@ -191,6 +191,7 @@ export const UserListCard: React.FC<ListCardProps> = ({ data }) => {
                             >
                                 <div className="flex flex-row items-center gap-6 ">
                                     <div className="flex flex-row items-center gap-2">
+                                        {/* User Avtar Logic */}
                                         <div className={`w-10 h-10 rounded-full  
                                           flex items-center justify-center
                                           border-2 border-teal-200 `}
