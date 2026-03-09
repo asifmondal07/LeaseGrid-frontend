@@ -53,16 +53,16 @@ export const ListView: React.FC<ListViewProps> = ({ data }) => {
 
 
 
-    const getPriorityColot = (priority?: string) => {
+    const getPriorityColor = (priority?: string) => {
         switch (priority) {
             case "Critical":
                 return "text-red-600 bg-red-100";
             case "High":
-                return "text-amber-600 bg-amber-100";
+                return "text-orange-600 bg-orange-100";
             case "Medium":
                 return "text-yellow-600 bg-yellow-100";
-            case "Low":
-                return "text-teal-600 bg-teal-100";
+            case "Resolved":
+                return "text-green-600 bg-green-100";
             default:
                 return "text-gray bg-gray";
         }
@@ -75,9 +75,11 @@ export const ListView: React.FC<ListViewProps> = ({ data }) => {
             case "In Progress":
                 return "text-blue-600 bg-blue-100"
             case "Waiting":
-                return "text-yellow-600 bg-yeollow-100"
+                return "text-yellow-600 bg-yellow-100"
             case "Resolved":
                 return "text-green-600 bg-green-100"
+            default:
+                return "text-gray bg-gray";
         }
     }
 
@@ -85,7 +87,7 @@ export const ListView: React.FC<ListViewProps> = ({ data }) => {
         <div className="w-full rounded-2xl">
             <div className="flex flex-row justify-between border-b border-slate-300 py-6 bg-white rounded-t-2xl">
                 {headerProps.map((item, key) =>
-                    <p key={key} className={` ${header} ${rowList}`}>{item}</p>
+                    <p key={key} className={` ${subject} ${rowList}`}>{item}</p>
 
                 )}
 
@@ -108,7 +110,11 @@ export const ListView: React.FC<ListViewProps> = ({ data }) => {
                         {ticket.ticketAssignee ? <div className={`${rowList} flex-row gap-2`}>
                             {<UserAvatar img={ticket.ticketAssignee?.avatar} className='w-8 h-8' />}
                             <p className={`${subSubject}`}>{ticket.ticketAssignee?.name}</p>
-                        </div> : <p className={`${subSubject}`}>Unassigned</p>
+                        </div> 
+                        : 
+                        <div className={`${rowList}`}>
+                            <p className={`${subSubject}`}>Unassigned</p>
+                            </div>
                         }
                         <div className={`${rowList}`}>
                             <p className={`px-4 py-2 rounded-full font-medium text-xs ${getStatus(ticket.ticket?.status)}`}>{ticket.ticket?.status}</p>
@@ -117,7 +123,7 @@ export const ListView: React.FC<ListViewProps> = ({ data }) => {
                             <p className={`${subSubject}`}>{ticket.ticket?.CreatedOn} ago</p>
                         </div>
                         <div className={`${rowList}`}>
-                            <p className={`px-4 py-2 rounded-full font-medium text-xs ${getPriorityColot(ticket.ticket?.priority)}`}>{ticket.ticket?.priority}</p>
+                            <p className={`px-4 py-2 rounded-full font-semibold text-xs ${getPriorityColor(ticket.ticket?.priority)}`}>{ticket.ticket?.priority}</p>
                         </div>
                         {ticketData.status !=="Resolved"? 
                             <div className={`${rowList} flex-row`}>

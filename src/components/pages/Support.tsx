@@ -19,7 +19,7 @@ const Support: React.FC = () => {
           <>
                <div className="p-2 space-y-6 max-w-[1600px] mx-auto">
                     {/* First Div Row Components */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                          <StatusCard data={SupportData} />
                     </div>
 
@@ -46,7 +46,7 @@ const Support: React.FC = () => {
                               </div>
                          </div>
 
-                         <div className="grid grid-rows-1 sm:grid-rows-1 lg:grid-rows-1 gap-4 border-slate-300 border rounded-2xl">
+                         <div className="grid grid-rows-1 sm:grid-rows-1 lg:grid-rows-1 gap-4">
                               {view === "list" ? <ListView data={TicketData} /> : 
                                    <GridView
                                         data={TicketData}

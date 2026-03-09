@@ -33,12 +33,6 @@ export const SupportData:CardProps[] = [
           badgeText: "Resolved",
           subtitle:"This week"
      },
-     {
-          value: 89,
-          icon: TicketX,
-          badgeText: "Cancelled",
-          subtitle:"This week"
-     }
 ];
 
 
@@ -54,7 +48,6 @@ export const TicketData:TicketProps[] = [
                CreatedOn:"5h ",
                sla: 16
           },
-          ticketAssignee:{name:"John Doe",avatar:"https://i.pravatar.cc/40"},
           ticketRequestor:{name:"Sarah Johnson",avatar:"https://i.pravatar.cc/40"},
      },
      {
@@ -63,11 +56,10 @@ export const TicketData:TicketProps[] = [
                subject: "Payment gateway integration error",
                subSubject:"Users unable to complete rent payments.",
                status: "New",
-               priority: "Critical",
+               priority: "High",
                CreatedOn:"5h ",
                sla: 10
           },
-          ticketAssignee:{name:"John Doe",avatar:"https://i.pravatar.cc/40"},
           ticketRequestor:{name:"Sarah Johnson",avatar:"https://i.pravatar.cc/40"},
      },
      {
@@ -76,7 +68,7 @@ export const TicketData:TicketProps[] = [
                subject: "Payment gateway integration error",
                subSubject:"Users unable to complete rent payments.",
                status: "Resolved",
-               priority: "Critical",
+               priority: "Resolved",
                CreatedOn:"5h ",
                sla: 4
           },
@@ -89,7 +81,7 @@ export const TicketData:TicketProps[] = [
                subject: "Payment gateway integration error",
                subSubject:"Users unable to complete rent payments.",
                status: "In Progress",
-               priority: "Critical",
+               priority: "Medium",
                CreatedOn:"5h ",
                sla: 4
           },
@@ -102,7 +94,7 @@ export const TicketData:TicketProps[] = [
                subject: "Payment gateway integration error",
                subSubject:"Users unable to complete rent payments.",
                status: "Waiting",
-               priority: "Critical",
+               priority: "High",
                CreatedOn:"5h ",
                sla: 4
           },
