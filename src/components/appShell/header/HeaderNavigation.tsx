@@ -6,6 +6,8 @@ import { useAuthStore } from "../../store/useAuthStore";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../common/fromComponent/button";
 import { header1 } from "../../common/style";
+import { UserAvatar } from "../../common/UserAvtar";
+import { Input } from "../../common/fromComponent/Input";
 
 export default function HeaderNavigation({ title, subtitle }: { title: string, subtitle?: string }) {
      const [username, setUserName] = useState('');
@@ -57,11 +59,11 @@ export default function HeaderNavigation({ title, subtitle }: { title: string, s
      return (
           <div className="h-17 sticky top-0 z-10 w-full
                     border-b border-slate-100 
-                    bg-white px-6 flex
+                    bg-white pl-4  flex
                     items-center justify-between"
           >
                {/* Left: Title */}
-               <div className="flex flex-col">
+               <div className="flex flex-col w-full">
                     <h1 className={header1}>
                          {title}
                     </h1>
@@ -69,25 +71,17 @@ export default function HeaderNavigation({ title, subtitle }: { title: string, s
                          <p className="text-sm text-slate-500">{subtitle}</p>
                     )}
                </div>
-               <div className="flex items-center gap-6">
+               <div className="flex items-center gap-6 w-full">
                     {/* Search */}
-                    <div className="relative mr-12 w-full">
-                         <input
+                    <div className="relative w-full">
+                         <Input
                               type="text"
                               placeholder="Search users, jobs, payments..."
-                              className="
-                              w-full
-                              mr-7
-                              pl-4 pr-30 py-2
-                              border border-green-600
-                              rounded-2xl 
-                              placeholder:text-zinc-300
-                              focus:outline-none focus:ring-2 focus:ring-green-200
-                              "
+                              className="!pl-4 !pr-9 !py-2 !border-green-600 !rounded-2xl focus:!ring-green-200"
                          />
 
                          <svg
-                              className="w-5 h-5 text-slate-400 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none"
+                              className="w-5 h-5 text-slate-400 absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none"
                               fill="none"
                               stroke="currentColor"
                               viewBox="0 0 24 24"
@@ -179,11 +173,9 @@ export default function HeaderNavigation({ title, subtitle }: { title: string, s
                     <div className="text-5xl font-light text-slate-100 flex  iteams-center pb-3">|</div>
                     {/* Profile */}
                     <div className="flex items-center gap-3 mr-5 cursor-pointer">
-                         <img
-                              src="https://i.pravatar.cc/40"
-                              alt="Profile"
-                              className="w-9 h-9 rounded-full object-cover"
-                         />
+                         <div className="flex items-center">
+                              <UserAvatar img="https://i.pravatar.cc/40" className="w-9 h-9 cursor-pointer" />
+                         </div>
                          <span className="text-sm font-medium text-slate-700">
                               {username?.split(' ')[0] || "jhon doe"}
                          </span>

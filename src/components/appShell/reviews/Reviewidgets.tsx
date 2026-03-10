@@ -1,4 +1,4 @@
-import { UserIcon } from "lucide-react";
+import { UserAvatar } from "../../common/UserAvtar";
 import { useEffect, useState } from "react";
 import { Button } from "../../common/fromComponent/button";
 import { header } from "../../common/style";
@@ -36,11 +36,7 @@ export const ReviewWidgets: React.FC<ReviewProps> = ({ data }) => {
                 <div className="border-2 flex flex-col p-4 justify-between shadow-md mb-2 bg-yellow-50 border-yellow-200 rounded-2xl">
                     <div className=" flex flex-row  justify-between ">
                         <div className="">
-                            {avatar ? <img src={avatar} alt={name}
-                                className={`border-1 border-yellow-200 w-10 h-10 rounded-full`} />
-                                : <UserIcon
-                                    className={`p-2 w-10 h-10 rounded-full bg-gray-200 border-1}`} />
-                            }
+                            <UserAvatar img={avatar} className={`w-10 h-10 border-1 border-yellow-200`} />
                         </div>
                         <div className="flex-1 ml-4">
                             <h3 className="text-sm font-bold text-slate-800">{name}</h3>
@@ -74,11 +70,7 @@ export const ReviewWidgets: React.FC<ReviewProps> = ({ data }) => {
                 <div className="border-2 flex flex-col p-4 justify-between shadow-md mb-2 border-slate-200 rounded-2xl">
                     <div className=" flex flex-row  justify-between ">
                         <div className="">
-                            {avatar ? <img src={avatar} alt={name}
-                                className={`border-1 border-yellow-200 w-10 h-10 rounded-full`} />
-                                : <UserIcon
-                                    className={`p-2 w-10 h-10 rounded-full bg-gray-200 border-1}`} />
-                            }
+                            <UserAvatar img={avatar} className={`w-10 h-10 border-1 border-yellow-200`} />
                         </div>
                         <div className="flex-1 ml-4">
                             <h3 className="text-sm font-bold text-slate-800">{name}</h3>

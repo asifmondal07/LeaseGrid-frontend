@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import SidebarItem from "./SidebarItems";
+import { UserAvatar } from "../common/UserAvtar";
 
 import {
   User,
@@ -66,12 +67,10 @@ const Sidebar: React.FC = () => {
 
       {/* Footer (optional) */}
       {/* Profile */}
-      <div className="flex items-center gap-3 justify-between mb-5 pt-5 border-t border-slate-100  shadow-inner">
-        <img
-          src="https://i.pravatar.cc/40"
-          alt="Profile"
-          className="w-9 h-9 rounded-full object-cover cursor-pointer ml-2 "
-        />
+      <div className="flex items-center gap-3 justify-between mb-5 pt-5 border-t border-slate-100 px-2">
+        <div className="flex items-center">
+          <UserAvatar img="https://i.pravatar.cc/40" className="w-10 h-10 cursor-pointer" />
+        </div>
         {username ? <span
           className="text-sm font-semibold text-slate-800 bg-green-200 px-4 py-1 
                           rounded-xl mr-10"

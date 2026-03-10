@@ -1,4 +1,4 @@
-import { UserIcon, CalendarDaysIcon, Clock, HousePlus, Mail, UserRoundX, RefreshCwOff, File, BriefcaseBusiness, CircleCheck, UserX, Save } from "lucide-react";
+import { CalendarDaysIcon, Clock, HousePlus, Mail, UserRoundX, RefreshCwOff, File, BriefcaseBusiness, CircleCheck, UserX, Save } from "lucide-react";
 import { Search, SlidersHorizontal, ArrowDownWideNarrow, LayoutGrid, X } from "lucide-react";
 import React, { useState } from "react";
 import { Input } from "../../common/fromComponent/Input";
@@ -10,6 +10,7 @@ import { Button } from "../../common/fromComponent/button";
 import Box from "@mui/material/Box";
 import Dialog from "@mui/material/Dialog";
 import { header1, subHeader } from "../../common/style";
+import { UserAvatar } from "../../common/UserAvtar";
 
 
 
@@ -248,12 +249,7 @@ export const UserTable: React.FC<UserTableProps> = ({
                                           flex items-center justify-center
                                           border-3 ${getProfileBorderColor(user.status)}`}
                                    >
-                                        {user.avatar ? <img src={user.avatar} alt=""
-                                             className="rounded-full w-full 
-                                             h-full " />
-                                             : <UserIcon
-                                                  className="w-full h-full p-2 rounded-full bg-gray-200" />
-                                        }
+                                        <UserAvatar img={user.avatar} className="w-full h-full" />
                                    </div>
                                    <div className="flex flex-col gap-2">
                                         <span
@@ -348,12 +344,7 @@ export const UserTable: React.FC<UserTableProps> = ({
                                              flex items-center justify-center
                                              border-3 ${getProfileBorderColor(selectedUser.status)}`}
                                         >
-                                             {selectedUser.avatar ? <img src={selectedUser.avatar} alt=""
-                                                  className="rounded-full w-full 
-                                                  h-full " />
-                                                  : <UserIcon
-                                                       className="w-full h-full p-2 rounded-full bg-gray-200" />
-                                             }
+                                             <UserAvatar img={selectedUser.avatar} className="w-full h-full" />
                                         </div>
                                         <div className="flex flex-col">
                                              <div>

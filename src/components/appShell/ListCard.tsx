@@ -1,5 +1,5 @@
 import Checkbox from "@mui/material/Checkbox";
-import { CalendarDays, Clock, House, Mail, MapPin, Phone, UserIcon, CircleAlert, X, type LucideIcon, BriefcaseBusiness, } from "lucide-react";
+import { CalendarDays, Clock, House, Mail, MapPin, Phone, CircleAlert, X, type LucideIcon, BriefcaseBusiness, } from "lucide-react";
 import { Button } from "../common/fromComponent/button";
 import { useState } from "react";
 import IconButton from "@mui/material/IconButton";
@@ -9,6 +9,7 @@ import Dialog from "@mui/material/Dialog";
 import { topPerformingTradiesData } from "../data/topPerformingTradiesData";
 import { type TopPerformingTradiesItem } from "./dashboard/DashboardWidgets";
 import ProgressBar from "../common/ProgressBar";
+import { UserAvatar } from "../../components/common/UserAvtar";
 
 
 
@@ -196,12 +197,7 @@ export const UserListCard: React.FC<ListCardProps> = ({ data }) => {
                                           flex items-center justify-center
                                           border-2 border-teal-200 `}
                                         >
-                                            {item.jobRequest.avatar ? <img src={item.jobRequest.avatar} alt=""
-                                                className="rounded-full w-full 
-                                             h-full " />
-                                                : <UserIcon
-                                                    className="w-full h-full p-2 rounded-full bg-gray-200" />
-                                            }
+                                            <UserAvatar img={item.jobRequest.avatar} className="w-full h-full" />
                                         </div>
                                         <div className="flex flex-col">
                                             <p className="text-sm font-medium">{item.jobRequest.name}</p>
@@ -216,12 +212,7 @@ export const UserListCard: React.FC<ListCardProps> = ({ data }) => {
                                           flex items-center justify-center
                                           border-2 border-teal-200 `}
                                             >
-                                                {item.tradie?.avatar ? <img src={item.tradie?.avatar} alt=""
-                                                    className="rounded-full w-full 
-                                             h-full " />
-                                                    : <UserIcon
-                                                        className="w-full h-full p-2 rounded-full bg-gray-200" />
-                                                }
+                                                <UserAvatar img={item.tradie?.avatar} className="w-full h-full" />
                                             </div>
                                             <div>
                                                 <p className="text-sm font-medium">{item.tradie?.name}</p>
@@ -234,8 +225,7 @@ export const UserListCard: React.FC<ListCardProps> = ({ data }) => {
                                               flex items-center justify-center
                                               border-2 border-teal-200 `}
                                             >
-                                                <UserIcon
-                                                    className="w-full h-full p-2 rounded-full bg-gray-200" />
+                                                <UserAvatar className="w-full h-full" />
                                             </div>
                                             <div>
                                                 <p className="text-sm font-medium">No Tradie Assigned</p>
@@ -331,12 +321,7 @@ export const UserListCard: React.FC<ListCardProps> = ({ data }) => {
                                         <div className={`w-15 h-15 rounded-full  
                                                         flex items-center justify-center border border-teal-200`}
                                         >
-                                            {selectedItems.jobRequest.avatar ? <img src={selectedItems.jobRequest.avatar} alt=""
-                                                className="rounded-full w-full 
-                                                    h-full " />
-                                                : <UserIcon
-                                                    className="w-full h-full p-2 rounded-full bg-gray-200" />
-                                            }
+                                            <UserAvatar img={selectedItems.jobRequest.avatar} className="w-full h-full" />
                                         </div>
                                         <div>
                                             <p className="text-md font-semibold">{selectedItems.jobRequest.name}</p>
@@ -396,11 +381,7 @@ export const UserListCard: React.FC<ListCardProps> = ({ data }) => {
                                                                     <div className="flex flex-row">
                                                                         <div className="flex-row flex items-center gap-4 w-full">
                                                                             <div className={`w-10 h-10 rounded-full flex items-center justify-center border-2 border-teal-200`}>
-                                                                                {item.avatar ? <img src={item.avatar} alt=""
-                                                                                    className="rounded-full w-full h-full " />
-                                                                                    : <UserIcon
-                                                                                        className="w-full h-full p-2 rounded-full bg-gray-200" />
-                                                                                }
+                                                                                <UserAvatar img={item.avatar} className="w-full h-full" />
                                                                             </div>
                                                                             <div>
                                                                                 <p className="text-sm font-semibold text-slate-800">{item.name}</p>
@@ -456,12 +437,7 @@ export const UserListCard: React.FC<ListCardProps> = ({ data }) => {
                                                         flex items-center justify-center
                                                         border-2 border-teal-200 `}
                                                     >
-                                                        {selectedItems.tradie.avatar ? <img src={selectedItems.tradie.avatar} alt=""
-                                                            className="rounded-full w-full 
-                                                    h-full " />
-                                                            : <UserIcon
-                                                                className="w-full h-full p-2 rounded-full bg-gray-200" />
-                                                        }
+                                                        <UserAvatar img={selectedItems.tradie.avatar} className="w-full h-full" />
                                                     </div>
                                                     <div>
                                                         <p className="text-md font-semibold">{selectedItems.tradie.name}</p>

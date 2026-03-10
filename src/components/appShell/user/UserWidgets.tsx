@@ -1,4 +1,4 @@
-import { UserIcon, EyeIcon, CircleCheck, CircleX, X } from "lucide-react";
+import { EyeIcon, CircleCheck, CircleX, X } from "lucide-react";
 import { Button } from "../../common/fromComponent/button";
 import { useState } from "react";
 import Dialog from "@mui/material/Dialog";
@@ -74,13 +74,7 @@ export const RegistrationTable: React.FC<RegistrationListProps> = ({ data }) => 
                               items-center p-5 rounded-lg`}
                          >
                               <div className="p-2 rounded-full">
-                                   {item.avatar ? <img src={item.avatar} alt=""
-                                        className={`rounded-full w-15 
-                                             h-15 border-1 ${getProfileBorderColor(item.status)}`} />
-                                        : <UserIcon
-                                             className={`rounded-full w-15 p-2
-                                             h-15 border-1 ${getProfileBorderColor(item.status)}`} />
-                                   }
+                                   <UserAvatar img={item.avatar} className={`w-12 h-12 border ${getProfileBorderColor(item.status)}`} />
                               </div>
                               <div className="flex flex-col  ">
                                    <div className="flex justify-between items-center">
@@ -133,6 +127,17 @@ export const VerificationQueueTable: React.FC<VerificationListProps> = ({ data }
           setIsOpen(true);
      }
 
+     const avtarBorderColor = (status: string) => {
+          switch (status) {
+               case "Pending":
+                    return "border-yellow-200 bg-yellow-50 border-2";
+               case "Verified":
+                    return "border-green-200 bg-green-50 border-2";
+               default:
+                    return "border-gray-200 bg-gray-50 border-2";
+          }
+     }
+
 
      const getRegistrationType = (data: VerificationList) => {
           switch (data.status) {
@@ -143,12 +148,7 @@ export const VerificationQueueTable: React.FC<VerificationListProps> = ({ data }
                               <div className="flex flex-row gap-5 justify-between items-center w-full">
                                    <div className="flex flex-row gap-5">
                                         <div className="rounded-full p-2">
-                                             {data.avatar ? <img src={data.avatar} alt=""
-                                                  className="border-1 border-yellow-400 rounded-full w-full 
-                                                       h-full " />
-                                                  : <UserIcon
-                                                       className="w-full h-full p-2 rounded-full border-1 border-yellow-400" />
-                                             }
+                                             <UserAvatar img={data.avatar} className={`w-12 h-12 ${avtarBorderColor(data.status)}`} />
                                         </div>
                                         <div className="pt-2">
                                              <p className="font-bold text-md ">{data.name}</p>
@@ -192,12 +192,7 @@ export const VerificationQueueTable: React.FC<VerificationListProps> = ({ data }
                               <div className="flex flex-row gap-5 justify-between items-center w-full">
                                    <div className="flex flex-row gap-5">
                                         <div className="rounded-full p-2">
-                                             {data.avatar ? <img src={data.avatar} alt=""
-                                                  className="border-1 border-green-400 rounded-full w-full 
-                                                       h-full " />
-                                                  : <UserIcon
-                                                       className="w-full h-full p-2 rounded-full bg-gray-200" />
-                                             }
+                                             <UserAvatar img={data.avatar} className={`w-12 h-12 ${avtarBorderColor(data.status)}`} />
                                         </div>
                                         <div className="pt-2">
                                              <p className="font-bold text-md ">{data.name}</p>
@@ -276,8 +271,8 @@ export const VerificationQueueTable: React.FC<VerificationListProps> = ({ data }
                                    </div>
                                    <div className="flex flex-row gap-5 px-10">
                                         <div className="rounded-full ">
-                                             <UserAvatar img={selectedUser.avatar} className="w-10 h-10 border-green-300 border" />
-                                             
+                                             <UserAvatar img={selectedUser.avatar} className={`w-10 h-10 ${avtarBorderColor(selectedUser?.status)}`} />
+
                                         </div>
                                         <div>
                                              <p className="font-bold text-md ">{selectedUser?.name}</p>

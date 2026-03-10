@@ -9,12 +9,12 @@ import {
      Info,
      CheckCircle,
      ArrowRight,
-     UserIcon,
      Angry
 } from 'lucide-react';
 import Rating from '@mui/material/Rating';
 import { Button } from '../../common/fromComponent/button';
 import { header, subHeader } from '../../common/style';
+import { UserAvatar } from "../../common/UserAvtar";
 
 // Types for Recent Activity
 export interface ActivityItem {
@@ -93,7 +93,7 @@ export const RecentActivity: React.FC<RecentActivityProps> = ({ data, onViewAll 
                <div className="flex justify-between items-center mb-6">
                     <div>
                          <h3 className={header}>Recent User Activity</h3>
-                        <p className={subHeader}>Real-time updates</p>
+                         <p className={subHeader}>Real-time updates</p>
                     </div>
                     <Button
                          onClick={onViewAll || (() => { })}
@@ -268,6 +268,8 @@ export const TopPerformingTradies: React.FC<TopPerformingTradiesProps> = ({ data
           }
      }
 
+     
+
      return (
           <div className="bg-white p-6 rounded-2xl h-full flex flex-col">
 
@@ -282,11 +284,7 @@ export const TopPerformingTradies: React.FC<TopPerformingTradiesProps> = ({ data
                                              rounded-full ${getIdBgColor(index)}`}>
                                              {index + 1}
                                         </p>
-                                        {trades.avatar ? <img src={trades.avatar} alt=""
-                                             className="border-1 border-rose-400 w-10 h-10 rounded-full" />
-                                             : <UserIcon
-                                                  className="p-2 w-10 h-10 rounded-full bg-gray-200" />
-                                        }
+                                        <UserAvatar img={trades.avatar} className={`border-1 ${getTopTradiesColor(index)} w-10 h-10`} />
                                    </div>
                                    <div className="flex flex-col flex w-full ">
                                         <p className="text-md font-semibold text-slate-800">{trades.name}</p>
@@ -376,11 +374,7 @@ export const TopLandlords: React.FC<TopLandlordsProps> = ({ data, }) => {
                          >
                               <div className="flex justify-between">
                                    <div className="flex items-center gap-2">
-                                        {landlord.avatar ? <img src={landlord.avatar} alt=""
-                                             className="border-1 border-rose-400 w-10 h-10 rounded-full" />
-                                             : <UserIcon
-                                                  className="p-2 w-10 h-10 rounded-full bg-gray-200" />
-                                        }
+                                        <UserAvatar img={landlord.avatar} className={`border-1 ${getTopLandlordsColor(index)} w-10 h-10`}/>
                                         <div className="flex flex-col">
                                              <p className="text-md font-semibold text-slate-800">{landlord.name}</p>
                                              <div className="flex items-center gap-2 justify-center">
