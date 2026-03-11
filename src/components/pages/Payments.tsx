@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { failedPayoutsData, paymentData, TransactionData } from "../data/PaymentDAta";
+import { failedPayoutsData, paymentData, TransactionData,RefundData } from "../data/PaymentDAta";
 import { StatusCard } from "../appShell/Cards";
-import PieChartWithCustomizedLabel from "../appShell/payments/PaymentsCharts";
-import { RentChart } from "../appShell/payments/PaymentsCharts.tsx";
+import PieChartWithCustomizedLabel, { RentChart } from "../appShell/payments/PaymentsCharts";
 import { paymentTrendData } from "../data/PaymentDAta";
 import { header, subHeader } from "../common/style";
-import { FailedPayouts, TransactionWidgets } from "../appShell/payments/PaymentWidgets";
+import { FailedPayouts, TransactionWidgets,RefundCard } from "../appShell/payments/PaymentWidgets";
 import { Button } from "../common/fromComponent/button.tsx";
 import { RefreshCw } from "lucide-react";
 import { DropDown } from "../common/fromComponent/DropDown.tsx";
@@ -184,6 +183,7 @@ const Payments: React.FC = () => {
                                 color="primary"
                                 onClick={() => { }}
                                 label="Issue Refund"
+                                className="px-3 py-2 rounded-2xl"
                             />
                         </div>
                     </div>
@@ -191,12 +191,12 @@ const Payments: React.FC = () => {
                         <StatusCard data={paymentData.slice(0, 4)} />
                     </div>
                     <div>
-
+                        <RefundCard data={RefundData}/>
                     </div>
                 </div>
             </div>
         </>
-    );
+    )
 };
 
 export default Payments;

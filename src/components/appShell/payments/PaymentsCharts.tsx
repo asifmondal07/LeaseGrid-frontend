@@ -1,7 +1,7 @@
+import React from 'react';
 import { 
           Pie,
           PieChart,
-          type PieLabelRenderProps,
           ResponsiveContainer,
           Cell,
           AreaChart,
@@ -11,6 +11,7 @@ import {
           Tooltip,
           Area
        } from 'recharts';
+import type { PieLabelRenderProps } from 'recharts';
 
 
 // Transaction Volume Trend

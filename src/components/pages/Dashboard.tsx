@@ -13,15 +13,15 @@ import { topLandlordsData } from "../data/topPerformingLandlordsData";
 import { recentActivityData } from "../data/recentActivityData";
 import { systemAlertsData } from "../data/systemAlertsData"
 import { StatusCard } from "../appShell/Cards";
-import { DashboardCardData, ComplianceOverviewCard, QuickActionsCard } from "../data/dashboard.ts";
-import { paymentData, paymentWidgetsData } from "../data/PaymentDAta.ts";
-import { PaymentWidgets } from "../appShell/payments/PaymentWidgets.tsx";
-import { DisputesProps } from "../appShell/disputes/WidgetsCard.tsx";
-import { disputesData } from "../data/disputesDAta.ts";
-import { ReviewWidgets } from "../appShell/reviews/Reviewidgets.tsx";
-import { reviewsData } from "../data/reviewsData.ts";
-import { Button } from "../common/fromComponent/button.tsx";
-import { header, header1, subHeader } from "../common/style.tsx";
+import { DashboardCardData, ComplianceOverviewCard, QuickActionsCard } from "../data/dashboard";
+import { paymentData, paymentWidgetsData } from "../data/PaymentDAta";
+import { PaymentWidgets } from "../appShell/payments/PaymentWidgets";
+import { DisputesProps } from "../appShell/disputes/WidgetsCard";
+import { disputesData } from "../data/disputesDAta";
+import { ReviewWidgets } from "../appShell/reviews/Reviewidgets";
+import { reviewsData } from "../data/reviewsData";
+import { Button } from "../common/fromComponent/button";
+import { header, header1, subHeader } from "../common/style";
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();

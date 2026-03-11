@@ -10,6 +10,7 @@ import type {
   failedPayoutsDataProps,
   PaymentWidgetsDataProps,
   TransactionDataProps,
+  RefundDataProps
 } from "../appShell/payments/PaymentWidgets";
 
 export const paymentData: CardProps[] = [
@@ -282,3 +283,27 @@ export const TransactionData: TransactionDataProps[] = [
     },
   },
 ];
+
+
+
+
+export const RefundData:RefundDataProps[] = [
+    {
+      transactionId:406515,
+      user:{
+        avatar:"https://i.pravatar.cc/40",
+        name:"John Doe",
+        role:{
+          name:"Tradie",
+          type:"Electrician",
+        },
+      },
+      amount:{
+        refundAmount:100,
+        originalAmount:100,
+      },
+      reason:"Invalid Bank Accoun",
+      time:"2022-01-01",
+      status:"proccessing",
+    }
+]

@@ -1,7 +1,8 @@
-import { UserAvatar } from "../../common/UserAvtar";
+import React from "react";
+import { UserAvatar } from "../../common/UserAvtar.tsx";
 import { subject, subSubject } from "../../common/style";
 import { CircleDollarSign, Eye, RefreshCw, SquarePen, Timer } from "lucide-react";
-import Tooltip from "@mui/material/Tooltip"
+import Tooltip from "@mui/material/Tooltip";
 
 export interface PaymentWidgetsDataProps {
     transactionId: string;
@@ -200,7 +201,7 @@ export const FailedPayouts: React.FC<failedPayoutsProps> = ({ data }) => {
                                 < Tooltip title="View Details">
                                     <Eye className="w-4.5 h-4.5 text-teal-500 cursor-pointer" />
                                 </Tooltip>
-                                
+
 
                             </div>
                         </div>
@@ -376,3 +377,64 @@ export const TransactionWidgets: React.FC<TransactionProps> = ({ data }) => {
     );
 }
 
+
+
+
+
+
+
+export interface RefundDataProps {
+    transactionId: number;
+    user: {
+        avatar?: string;
+        name: string;
+        role: {
+            name: string;
+            type: string;
+        }
+    }
+    status: string;
+    amount: {
+        refundAmount: number;
+        originalAmount: number;
+    }
+    reason: string;
+    time: string;
+
+}
+
+interface RefundTableProps {
+    data: RefundDataProps[];
+}
+
+
+export const RefundCard: React.FC<RefundTableProps> = ({ data }) => {
+
+    return (
+        <div>
+            {data.map((item, index) => {
+                return (
+                    <div key={index} className="flex flex-col justify-between border-2 px-2">
+                        <div className="flex flex-row justify-between border-2">
+                            <div className="flex flex-row">
+                                <UserAvatar img={item.user.avatar} className={`border-1 border-red-100 w-10 h-10 `} />
+                                <div className="flex flex-col px-2">
+                                    <p>{item.user.name}</p>
+                                    <div className="flex flex-row">
+                                        <p>{item.transactionId}</p>
+                                        <p>{item.time}</p>
+                                    </div>
+                                    <p>{item.reason}</p>
+                                </div>
+                            </div>
+                            <div>
+                                <p>{item.status}</p>
+                            </div>
+                        </div>
+                    </div>
+                )
+            })}
+        </div>
+    )
+
+}
