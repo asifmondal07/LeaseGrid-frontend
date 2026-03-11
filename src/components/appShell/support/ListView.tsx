@@ -163,7 +163,7 @@ export const ListView: React.FC<ListViewProps> = ({ data }) => {
                             variant='contained' 
                             label='Next' 
                             onClick={() => { }} 
-                            className='rounded-lg px-4 py-2 flex flex-row-reverse gap-2'
+                            className='rounded-lg px-5 py-2 flex flex-row-reverse '
                             icon={ArrowBigRight} 
                         />
                     </div>

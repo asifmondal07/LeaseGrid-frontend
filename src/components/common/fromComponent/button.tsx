@@ -1,4 +1,5 @@
 import type { LucideIcon } from "lucide-react";
+
 interface ButtonProps {
   label?: string;
   onClick: () => void;
@@ -20,12 +21,12 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
 
   const containedStyles = {
-    primary: "bg-teal-500 text-white hover:bg-teal-600",
-    secondary: "bg-slate-500 text-white hover:bg-slate-600",
-    success: "bg-green-500 text-white hover:bg-green-600",
-    danger: "bg-red-500 text-white hover:bg-red-600",
-    warning: "bg-yellow-500 text-white hover:bg-yellow-600",
-    info: "bg-orange-500 text-white hover:bg-orange-600",
+    primary: "bg-teal-500 text-white hover:bg-teal-600 border-teal-500 border-2",
+    secondary: "bg-slate-500 text-white hover:bg-slate-600 border-slate-500 border-2",
+    success: "bg-green-500 text-white hover:bg-green-600 border-green-500 border-2",
+    danger: "bg-red-500 text-white hover:bg-red-600 border-red-500 border-2",
+    warning: "bg-yellow-500 text-white hover:bg-yellow-600 border-yellow-500 border-2",
+    info: "bg-orange-500 text-white hover:bg-orange-600 border-orange-500 border-2",
   };
 
   const outlinedStyles = {
@@ -40,12 +41,11 @@ export const Button: React.FC<ButtonProps> = ({
   const styles = variant === "contained" ? containedStyles[color] : outlinedStyles[color];
 
   return (
-
     <button
       onClick={onClick}
       className={`${styles} ${className} text-sm font-semibold rounded cursor-pointer flex items-center justify-center`}
     >
-      {Icon ? <span className="mr-2"><Icon className="h-4 w-4" /></span> : null}
+      {Icon ? <span className="px-2"><Icon className="h-4 w-4" /></span> : null}
       {children || label}
     </button>
   );

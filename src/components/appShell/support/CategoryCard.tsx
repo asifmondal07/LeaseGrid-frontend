@@ -1,5 +1,5 @@
 import  { type LucideIcon, Wallet, User, Cog, NotebookPen, Lightbulb } from "lucide-react";
-import { header, subject, subSubject, subSubSubject } from "../../common/style";
+import {subject,  subSubSubject } from "../../common/style";
 
 export interface categoryData{
     title:string;

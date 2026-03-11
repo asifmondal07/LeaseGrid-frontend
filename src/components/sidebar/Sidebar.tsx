@@ -73,11 +73,11 @@ const Sidebar: React.FC = () => {
         </div>
         {username ? <span
           className="text-sm font-semibold text-slate-800 bg-green-200 px-4 py-1 
-                          rounded-xl mr-10"
+          rounded-xl"
         >
           {username.split(' ')[0]}
         </span> :
-          <span className="text-sm font-medium text-slate-800 mr-10">
+          <span className="text-sm font-medium text-slate-800">
             john
           </span>
         }
@@ -86,7 +86,7 @@ const Sidebar: React.FC = () => {
           onClick={handleLogout}
           color="danger"
           variant="outlined"
-          className="px-3 py-1 rounded-xl mr-10"
+          className="px-3 py-1 rounded-xl"
         />
 
         <Loader open={open} onClose={() => setOpen(false)} />
