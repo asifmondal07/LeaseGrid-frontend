@@ -1,7 +1,8 @@
 import React from 'react';
+import { subHeader } from '../style';
 
 interface DropDownProps {
-    label: string;
+    label?: string;
     className?: string;
     onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
     children?: React.ReactNode;
@@ -14,16 +15,15 @@ export const DropDown: React.FC<DropDownProps> = ({
     className = "",
     options = [],
 }) => {
-    if (!label || !onChange || !options) {
-        throw new Error("DropDown component requires label, onChange, and options props");
+    if (!onChange || !options) {
+        throw new Error("DropDown component requires onChange, and options props");
     }
 
     return (
         <div>
+            {label && <label className={`block ${subHeader} pb-2 px-1`}>{label}</label>}
             <select
                 onChange={onChange}
-                name={label}
-                id={label}
                 className={`cursor-pointer border border-slate-200 text-slate-600 text-sm focus:outline-none 
                 focus:ring-2 focus:ring-teal-500/20 focus:border-teal-500 transition-all 
                 placeholder:text-slate-400 ${className}`}

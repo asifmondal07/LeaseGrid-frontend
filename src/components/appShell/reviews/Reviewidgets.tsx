@@ -77,7 +77,7 @@ export const ReviewWidgets: React.FC<ReviewProps> = ({ data }) => {
                             <p className="text-xs text-slate-500">{rating}</p>
                         </div>
                     </div>
-                    <div className=" mt-2 pl-14">
+                    <div className=" mt-2 py-2">
                         <p className="text-sm text-slate-600">{reviewMessage}</p>
                     </div>
                 </div>

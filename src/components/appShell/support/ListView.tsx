@@ -84,7 +84,7 @@ export const ListView: React.FC<ListViewProps> = ({ data }) => {
     }
 
     return (
-        <div className="w-full rounded-2xl">
+        <div className=" rounded-2xl w-500">
             <div className="flex flex-row justify-between border-b border-slate-300 py-6 bg-white rounded-t-2xl">
                 {headerProps.map((item, key) =>
                     <p key={key} className={` ${subject} ${rowList}`}>{item}</p>
@@ -92,16 +92,18 @@ export const ListView: React.FC<ListViewProps> = ({ data }) => {
                 )}
 
             </div>
-            <div className="flex flex-col rounded-2xl">
+            <div className="flex flex-col ">
                 {data?.map((ticket) => {
                     const ticketData = ticket.ticket
                     const percent = getRemainingPercent(ticketData.sla ?? 0)
                     return (
-                        <div key={ticket.ticket?.id} className="flex flex-row justify-between py-8 bg-white  border-b border-slate-300">
+                        <div key={ticket.ticket?.id} 
+                            className="flex flex-row justify-between py-8 bg-white  border-b border-slate-300 w-full"
+                            >
                             <p className={`${rowList} text-teal-400`}>#TKT-{ticket.ticket?.id}</p>
                             <div className={`${rowList} flex-col`}>
-                                <p className={`${subject}`}>{ticket.ticket?.subject}</p>
-                                <p className={`${subSubject}`}>{ticket.ticket?.subSubject}</p>
+                                <p className={`${subject} whitespace-nowrap`}>{ticket.ticket?.subject}</p>
+                                <p className={`${subSubject} whitespace-nowrap`}>{ticket.ticket?.subSubject}</p>
                             </div>
                             <div className={`${rowList} flex-row gap-2`}>
                                 {<UserAvatar img={ticket.ticketRequestor?.avatar} className='w-8 h-8' />}
@@ -146,7 +148,9 @@ export const ListView: React.FC<ListViewProps> = ({ data }) => {
                         </div>
                     )
                 })}
-                <div className='bg-white rounded-2xl py-3 p-4 flex flex-row justify-between itms-center'>
+               
+            </div>
+             <div className='bg-white rounded-b-2xl pt-6 p-4 flex flex-row justify-between itms-center border-t border-slate-200'>
                     <div className='flex flex-row'>
                         <p>Showing 1 - 3 of 456 tickets</p>
                         <p> </p>
@@ -168,7 +172,6 @@ export const ListView: React.FC<ListViewProps> = ({ data }) => {
                         />
                     </div>
                 </div>
-            </div>
         </div>
     );
 };

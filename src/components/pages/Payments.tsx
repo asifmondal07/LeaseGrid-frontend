@@ -109,13 +109,11 @@ const Payments: React.FC = () => {
                         </div>
                         <div className="flex flex-row items-center gap-4">
                             <DropDown
-                                label="Drop"
                                 options={["All Types", "Rent Payment", "Job Payment", "Refund"]}
                                 className="px-3 py-2 rounded-full"
                                 onChange={(e) => setSelectedType(e.target.value)}
                             />
                             <DropDown
-                                label="Drop"
                                 options={["All Status", "Success", "Pending", "Failed"]}
                                 className="px-3 py-2 rounded-full"
                                 onChange={(e) => setSelectedStatus(e.target.value)}

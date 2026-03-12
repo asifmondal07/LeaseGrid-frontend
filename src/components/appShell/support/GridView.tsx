@@ -9,6 +9,7 @@ export interface ListViewProps {
 }
 
 export const GridView: React.FC<ListViewProps> = ({ data }) => {
+    
     const getPriorityColor = (priority?: string) => {
         switch (priority) {
             case "Critical":

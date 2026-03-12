@@ -5,6 +5,7 @@ import { CircleCheck, CircleDollarSign, CircleX, Eye, RefreshCw, SquarePen, Time
 import Tooltip from "@mui/material/Tooltip";
 import { Button } from "../../common/fromComponent/button.tsx";
 import moment from "moment";
+import { GetDays } from "../../common/GetDays.tsx";
 
 export interface PaymentWidgetsDataProps {
     transactionId: string;
@@ -414,27 +415,7 @@ interface RefundTableProps {
 
 export const RefundCard: React.FC<RefundTableProps> = ({ data }) => {
 
-
-
-    const today = moment();
-
-    const getTime = (item: RefundDataProps) => {
-        const itemTime = moment(item.time);
-
-        if (!itemTime.isValid()) {
-            return "Invalid date";
-        }
-
-        const timeDifference = today.diff(itemTime, 'hours');
-
-        if (timeDifference < 24) {
-            return `${timeDifference} hours ago`;
-        } else {
-            const days = Math.floor(timeDifference / 24);
-            return days === 1 ? '1 day ago' : `${days} days ago`;
-        }
-    };
-
+    
     const getStatusColor = (status: String) => {
 
         switch (status) {
@@ -461,7 +442,6 @@ export const RefundCard: React.FC<RefundTableProps> = ({ data }) => {
                 return "bg-gray-50 border-gray-200";
         }
     }
-
     return (
         <div className="flex flex-col gap-2 my-4">
             {data.map((item, index) => {
@@ -476,7 +456,7 @@ export const RefundCard: React.FC<RefundTableProps> = ({ data }) => {
                                     <p className={`${subject}`}>{item.user.name}</p>
                                     <div className="flex flex-row gap-2">
                                         <p className={`${subSubject}`}>Transaction #TXN-{item.transactionId}</p>
-                                        <p className={`${subSubject}`}>Approved {getTime(item)} </p>
+                                        <p className={`${subSubject}`}>Approved {GetDays(item.time)} </p>
                                     </div>
                                     <p className={`${subSubject}`}>Reason: {item.reason}</p>
                                 </div>
@@ -654,7 +634,7 @@ export const PaymentAdjustmentsCard: React.FC<PaymentAdjustmentsProps> = ({ data
                                 <p className={`${amountColor(item.type)} text-sm font-semibold w-full text-center`}>{item.type === "Debit" ? "-" : "+"}${item.amount}</p>
                             </div>
                             <div className={`${rowlist}`}>
-                                <p className={`${subSubject} w-full text-center`}>
+                                <p className={`${subSubject} w-full text-center whitespace-nowrap`}>
                                     {item.reason}
                                 </p>
                             </div>
